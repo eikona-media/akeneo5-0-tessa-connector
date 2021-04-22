@@ -1,0 +1,42 @@
+{% extends 'AkeneoPimEnrichmentBundle:Product:renderPdf.html.twig' %}
+
+{% block attribute %}
+    {% set locale_attribute = attribute.isLocalizable or attribute.isLocaleSpecific ? locale : null %}
+    {% set channel_attribute = attribute.isScopable ? scope : null %}
+    {% set content = product.getValue(attribute.code, locale_attribute, channel_attribute) %}
+    {% set manualHeight = true %}
+
+    {% if 'pim_catalog_image' == attribute.type and content.media is not null %}
+        {% set content = content.media.originalFilename %}
+        {% set manualHeight = false %}
+    {% elseif ('pim_catalog_simpleselect' == attribute.type or 'pim_catalog_multiselect' == attribute.type) and attribute.code in optionLabels|keys %}
+        {% set content = optionLabels[attribute.code] %}
+    {% elseif 'eikona_catalog_tessa' == attribute.type %}
+        {% set content = tessaAssets[attribute.code] %}
+    {% endif %}
+
+    {% if content != null and manualHeight == true %}
+        {% set manualHeight = attribute.label|length >(content.__toString()|length / 3) %}
+    {% endif %}
+
+    <div class="attributes"{% if manualHeight %} style="height: {{ (attribute.label|length / 30)|round(0, 'ceil') * 18 + 10 }}px"{% endif %}>
+        <div class="left-column">
+            {{ attribute.label }}
+        </div>
+        <div class="right-column">
+            {% if 'pim_catalog_textarea' == attribute.type and attribute.isWysiwygEnabled %}
+                {{ content|raw }}
+            {% elseif 'pim_catalog_boolean' == attribute.type %}
+                {# @todo @merge: refactor on master - use new translation keys #}
+                {{ (content.data ? 'Yes' : 'No')|trans([], null, locale) }}
+            {% elseif 'eikona_catalog_tessa' == attribute.type %}
+                {% for asset in content %}
+                    <img src="{{ asset }}" style="width: 100px; margin-right: 10px;">
+                {% endfor %}
+            {% else %}
+                {{ content }}
+            {% endif %}
+            &nbsp;
+        </div>
+    </div>
+{% endblock %}

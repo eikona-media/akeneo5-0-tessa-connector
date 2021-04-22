@@ -1,0 +1,30 @@
+pim_eikona_tessa_connector:
+    settings:
+        base_url:
+            value: ~
+            scope: app
+        ui_url:
+            value: ~
+            scope: app
+        username:
+            value: ~
+            scope: app
+        api_key:
+            value: ~
+            scope: app
+        system_identifier:
+            value: ~
+            scope: app
+        sync_in_background:
+            value: false
+            scope: app
+        chunk_size:
+            value: 100
+            scope: app
+        user_used_by_tessa:
+            value: ~
+            scope: app
+        disable_asset_editing_in_akeneo_ui:
+            value: false
+            scope: app
+

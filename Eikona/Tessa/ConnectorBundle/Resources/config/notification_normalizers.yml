@@ -1,0 +1,75 @@
+services:
+  eikona.tessa.notification_normalizer:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\NotificationNormalizer
+    arguments:
+      - !tagged_iterator eikona.tessa.modification_notification_normalizer
+      - !tagged_iterator eikona.tessa.deletion_notification_normalizer
+
+  # Modification
+  eikona.tessa.modification_notification_normalizer.product:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Modification\ProductNotificationNormalizer
+    arguments:
+      - '@eikona.utilities.id_prefixer'
+      - '@eikona.tessa.normalizer.standard.product'
+    tags:
+      - { name: eikona.tessa.modification_notification_normalizer }
+
+  eikona.tessa.modification_notification_normalizer.product_model:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Modification\ProductModelNotificationNormalizer
+    arguments:
+      - '@eikona.utilities.id_prefixer'
+      - '@pim_standard_format_serializer'
+    tags:
+      - { name: eikona.tessa.modification_notification_normalizer }
+
+  eikona.tessa.modification_notification_normalizer.category:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Modification\CategoryNotificationNormalizer
+    arguments:
+      - '@pim_standard_format_serializer'
+    tags:
+      - { name: eikona.tessa.modification_notification_normalizer }
+
+  eikona.tessa.modification_notification_normalizer.channel:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Modification\ChannelNotificationNormalizer
+    arguments:
+      - '@pim_standard_format_serializer'
+    tags:
+      - { name: eikona.tessa.modification_notification_normalizer }
+
+  eikona.tessa.modification_notification_normalizer.group:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Modification\GroupNotificationNormalizer
+    arguments:
+      - '@pim_standard_format_serializer'
+    tags:
+      - { name: eikona.tessa.modification_notification_normalizer }
+
+  # Deletion
+  eikona.tessa.deletion_notification_normalizer.product:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Deletion\ProductNotificationNormalizer
+    arguments:
+      - '@eikona.utilities.id_prefixer'
+    tags:
+      - { name: eikona.tessa.deletion_notification_normalizer }
+
+  eikona.tessa.deletion_notification_normalizer.product_model:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Deletion\ProductModelNotificationNormalizer
+    arguments:
+      - '@eikona.utilities.id_prefixer'
+    tags:
+      - { name: eikona.tessa.deletion_notification_normalizer }
+
+  eikona.tessa.deletion_notification_normalizer.category:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Deletion\CategoryNotificationNormalizer
+    tags:
+      - { name: eikona.tessa.deletion_notification_normalizer }
+
+  eikona.tessa.deletion_notification_normalizer.channel:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Deletion\ChannelNotificationNormalizer
+    tags:
+      - { name: eikona.tessa.deletion_notification_normalizer }
+
+  eikona.tessa.deletion_notification_normalizer.group:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\NotificationNormalizer\Deletion\GroupNotificationNormalizer
+    tags:
+      - { name: eikona.tessa.deletion_notification_normalizer }
+

@@ -1,0 +1,30 @@
+Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\CreateTessaAttributeCommand:
+  group_sequence:
+    - CreateTessaAttributeCommand
+    - other_constraints
+  properties:
+    referenceEntityIdentifier:
+      - Akeneo\ReferenceEntity\Infrastructure\Validation\ReferenceEntity\Code: ~
+    code:
+      - Akeneo\ReferenceEntity\Infrastructure\Validation\Attribute\Code: ~
+    labels:
+      - Akeneo\ReferenceEntity\Infrastructure\Validation\ReferenceEntity\LabelCollection: ~
+    isRequired:
+      - Akeneo\ReferenceEntity\Infrastructure\Validation\Attribute\IsRequired: ~
+    valuePerChannel:
+      - Akeneo\ReferenceEntity\Infrastructure\Validation\Attribute\ValuePerChannel: ~
+    valuePerLocale:
+      - Akeneo\ReferenceEntity\Infrastructure\Validation\Attribute\ValuePerLocale: ~
+    maxAssets:
+      - Eikona\Tessa\ReferenceDataAttributeBundle\Validation\Attribute\TessaMaxAssets: ~
+    allowedExtensions:
+      - Akeneo\ReferenceEntity\Infrastructure\Validation\Attribute\AllowedExtensions: ~
+  constraints:
+    - Akeneo\ReferenceEntity\Infrastructure\Validation\Attribute\AttributeShouldNotExist: { groups: [other_constraints] }
+    - Akeneo\ReferenceEntity\Infrastructure\Validation\Attribute\ThereShouldBeLessAttributesThanLimit: { groups: [other_constraints] }
+
+
+Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxAssets\EditTessaMaxAssetsCommand:
+  properties:
+    maxAssets:
+      - Eikona\Tessa\ReferenceDataAttributeBundle\Validation\Attribute\TessaMaxAssets: ~

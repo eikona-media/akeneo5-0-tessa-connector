@@ -1,0 +1,152 @@
+﻿﻿<h3>
+    <img style="height: 80px; margin-bottom: 1em;" src="/bundles/eikonatessaconnector/images/tessa_logo_02.png"/>
+    <p>
+        <a href="http://tessa-dam.de/" target="_blank"><%- _.__('tessa.configuration.link.label')%></a>
+    </p>
+</h3>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___ui_url">
+            <%- _.__('tessa.configuration.ui_url.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer field-input">
+        <input class="tessa-config  AknTextField"
+               id="pim_eikona_tessa_connector___ui_url"
+               name="pim_eikona_tessa_connector___ui_url"
+               type="text" value="<%- uiUrl %>"/>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.ui_url.description') %>
+    </div>
+</div>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___base_url">
+            <%- _.__('tessa.configuration.base_url.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer field-input">
+        <input class="tessa-config  AknTextField"
+               id="pim_eikona_tessa_connector___base_url"
+               name="pim_eikona_tessa_connector___base_url"
+               type="text" value="<%- baseUrl %>"/>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.base_url.description') %>
+    </div>
+</div>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___username">
+            <%- _.__('tessa.configuration.username.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer field-input">
+        <input class="tessa-config  AknTextField"
+               id="pim_eikona_tessa_connector___username"
+               name="pim_eikona_tessa_connector___username"
+               type="text" value="<%- username %>"/>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.username.description') %>
+    </div>
+</div>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___api_key">
+            <%- _.__('tessa.configuration.apikey.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer field-input">
+        <input class="tessa-config  AknTextField"
+               id="pim_eikona_tessa_connector___api_key"
+               name="pim_eikona_tessa_connector___api_key"
+               type="text" value="<%- apikey %>"/>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.apikey.description') %>
+    </div>
+</div>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___system_identifier">
+            <%- _.__('tessa.configuration.systemidentifier.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer field-input">
+        <input class="tessa-config  AknTextField"
+               id="pim_eikona_tessa_connector___system_identifier"
+               name="pim_eikona_tessa_connector___system_identifier"
+               type="text" value="<%- systemidentifier %>"/>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.systemidentifier.description') %>
+    </div>
+</div>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___sync_in_background">
+            <%- _.__('tessa.configuration.syncinbackground.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer">
+        <div class="switch switch-small" data-on-label="Yes" data-off-label="No">
+            <input
+                id="pim_eikona_tessa_connector___sync_in_background"
+                type="checkbox"
+                name="pim_eikona_tessa_connector___sync_in_background"
+                class="tessa-config"
+                <% if (syncinbackground) { %> checked<% } %>
+            >
+        </div>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.syncinbackground.description') %>
+    </div>
+</div>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___user_used_by_tessa">
+            <%- _.__('tessa.configuration.userusedbytessa.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer field-input">
+        <input class="tessa-config  AknTextField"
+               id="pim_eikona_tessa_connector___user_used_by_tessa"
+               name="pim_eikona_tessa_connector___user_used_by_tessa"
+               type="text" value="<%- userUsedByTessa %>"/>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.userusedbytessa.description') %>
+    </div>
+</div>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___disable_asset_editing_in_akeneo_ui">
+            <%- _.__('tessa.configuration.disableasseteditinginakeneoui.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer">
+        <div class="switch switch-small" data-on-label="Yes" data-off-label="No">
+            <input
+                id="pim_eikona_tessa_connector___disable_asset_editing_in_akeneo_ui"
+                type="checkbox"
+                name="pim_eikona_tessa_connector___disable_asset_editing_in_akeneo_ui"
+                class="tessa-config"
+            <% if (disableAssetEditingInAkeneoInUi) { %> checked<% } %>
+            >
+        </div>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.disableasseteditinginakeneoui.description') %>
+    </div>
+</div>

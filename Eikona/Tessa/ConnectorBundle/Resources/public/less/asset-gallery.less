@@ -1,0 +1,112 @@
+//noinspection CssUnknownTarget
+@import '../../pimui/less/base/variables';
+
+.AknButton-squareIcon--undo {
+  //noinspection CssUnknownTarget
+  background-image: url("/bundles/eikonatessaconnector/images/icon-undo-white.svg");
+  background-size: 90% !important;
+}
+
+.EikonModalAssetsSelection {
+  width: 95vw;
+  height: 95vh;
+  left: 2.5vw;
+  top: 2.5vh;
+  margin: 0;
+
+  .AknFullPage {
+    width: 100%;
+    height: 100%;
+    padding: 20px 0 0 0;
+
+    .AknFullPage-content {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+
+      > div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+
+        .modal-body {
+          flex: 1;
+
+          iframe {
+            display: block;
+            border: none;
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+//noinspection LessUnresolvedVariable
+.EikonAssetGallery {
+  width: @AknMaxFormWidth;
+  border: 1px solid @AknBorderColor;
+
+  &.readonly {
+    background-color: #e9ebee;
+  }
+  input[name=asset-sids] {
+    display: none;
+  }
+  ul.AknAssetCollectionField-list {
+
+    li.AknAssetCollectionField-listItem {
+
+      &.EikonAssetGallery-listitem--markedToRemove {
+        background-color: lighten(#D4604F, 35%);
+      }
+      .AknIconButton {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        min-width: 30px;
+      }
+    }
+    i.icon {
+      font-size: 14px;
+      margin-left: 5.4px;
+      margin-top: 3px;
+    }
+    &.empty {
+      display: none;
+      + div.placeholder {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    + div.placeholder {
+      display: none;
+      height: 100px;
+      img {
+        align-self: center;
+        margin-top: 10px;
+        height: 80%;
+      }
+    }
+    &:before,
+    &:after {
+      display: table;
+      line-height: 0;
+      content: "";
+    }
+    &:after {
+      clear: both;
+    }
+  }
+  footer {
+    background: #f8f8f9;
+    border-top: 1px solid #ccd1d8;
+    padding: 2px 10px;
+    width: 100%;
+  }
+}

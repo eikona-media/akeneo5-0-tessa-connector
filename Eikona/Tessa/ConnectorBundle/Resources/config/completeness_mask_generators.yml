@@ -1,0 +1,4 @@
+services:
+    eikona.tessa.completeness.mask_item_generator.default:
+        class: Eikona\Tessa\ConnectorBundle\Product\Completeness\MaskItemGenerator\TessaMaskItemGenerator
+        tags: [{ name: akeneo.pim.enrichment.completeness.mask_item_generator }]

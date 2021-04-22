@@ -1,0 +1,30 @@
+parameters:
+  eikona.media.tessa.updater.attribute.class: Eikona\Tessa\ConnectorBundle\Updater\TessaAttributeUpdater
+  eikona.media.tessa.updater.attribute.properties:
+    - !php/const Eikona\Tessa\ConnectorBundle\AttributeType\TessaType::ATTRIBUTE_EXPORT_URL
+
+services:
+  eikona.media.tessa.updater.attribute:
+    class: '%eikona.media.tessa.updater.attribute.class%'
+    decorates: pim_catalog.updater.attribute
+    arguments:
+      - '@eikona.media.tessa.updater.attribute.inner'
+      - '%eikona.media.tessa.updater.attribute.properties%'
+
+  eikona.media.tessa.updater.setter.product_reference_value:
+    class: '%pim_catalog.updater.setter.value.class%'
+    parent: pim_catalog.updater.setter.abstract
+    arguments:
+      - ['eikona_catalog_tessa']
+    tags:
+      - { name: 'pim_catalog.updater.setter' }
+
+  eikona.media.tessa.updater.copier.product_reference_value:
+    class: '%pim_catalog.updater.copier.value.class%'
+    parent: pim_catalog.updater.copier.abstract
+    arguments:
+      - '@pim_standard_format_serializer'
+      - ['eikona_catalog_tessa']
+      - ['eikona_catalog_tessa']
+    tags:
+      - { name: 'pim_catalog.updater.copier' }

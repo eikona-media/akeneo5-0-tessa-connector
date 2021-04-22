@@ -1,0 +1,20 @@
+parameters:
+  eikona.tessa.renderer.product_pdf.class: Eikona\Tessa\ConnectorBundle\PdfGeneration\Renderer\ProductPdfRenderer
+
+services:
+  eikona.tessa.renderer.product_pdf:
+    class: '%eikona.tessa.renderer.product_pdf.class%'
+    arguments:
+      - '@eikona.tessa'
+      - '@eikona.tessa.auth_guard'
+      - '@templating'
+      - '@pim_pdf_generator.builder.dompdf'
+      - '@liip_imagine.data.manager'
+      - '@liip_imagine.cache.manager'
+      - '@liip_imagine.filter.manager'
+      - '@pim_catalog.repository.cached_attribute'
+      - 'AkeneoPimEnrichmentBundle:Product:renderPdf.html.twig'
+      - '@pim_catalog.repository.cached_attribute_option'
+      - '%pim_pdf_generator_font%'
+    tags:
+      - { name: pim_pdf_generator.renderer, priority: 81 }

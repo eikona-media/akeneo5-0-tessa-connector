@@ -1,0 +1,16 @@
+services:
+
+  # Modification
+  eikona.tessa.modification_notification_normalizer.reference_entity:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Normalizer\NotificationNormalizer\Modification\ReferenceEntityNotificationNormalizer
+    arguments:
+      - '@akeneo_referenceentity.infrastructure.persistence.query.find_connector_record_by_reference_entity_and_code'
+      - '@akeneo_referenceentity.infrastructure.persistence.query.find_reference_entity_details'
+    tags:
+      - { name: eikona.tessa.modification_notification_normalizer }
+
+  # Deletion
+  eikona.tessa.deletion_notification_normalizer.reference_entity:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Normalizer\NotificationNormalizer\Deletion\ReferenceEntityNotificationNormalizer
+    tags:
+      - { name: eikona.tessa.deletion_notification_normalizer }

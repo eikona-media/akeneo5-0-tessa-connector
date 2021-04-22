@@ -1,0 +1,6 @@
+extensions:
+  pim-product-model-edit-form-goto-tessa-gallery:
+    module: eikona/tessa/connector/product-model-edit-form/gallery-link
+    parent: pim-product-model-edit-form-secondary-actions
+    targetZone: secondary-actions
+    position: 60

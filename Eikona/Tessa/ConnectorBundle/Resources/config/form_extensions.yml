@@ -1,0 +1,30 @@
+extensions:
+
+    eikon-tessa-asset-selection-form:
+        module: eikona/tessa/connector/mam-asset-selection-form
+        targetZone: self
+
+    eikon-tessa-system-configuration:
+        module: eikona/tessa/connector/system/configuration
+        parent: oro-system-config-tabs
+        targetZone: container
+        position: 110
+
+    eikona-tessa-product-edit-form-product-info:
+        module: eikona/tessa/connector/attributes/product-info
+        parent: pim-product-edit-form-attributes
+        targetZone: self
+        position: 100
+
+    eikona-tessa-product-edit-form-product-model-info:
+        module: eikona/tessa/connector/attributes/product-info
+        parent: pim-product-model-edit-form-attributes
+        targetZone: self
+        position: 100
+
+    pim-family-edit-form-properties-general-attribute-as-image:
+        config:
+            validAttributeTypes: [ 'pim_catalog_image', 'pim_assets_collection', 'eikona_catalog_tessa' ]
+
+attribute_fields:
+    eikona-tessa-field: eikona/tessa/connector/eikona-mam-field

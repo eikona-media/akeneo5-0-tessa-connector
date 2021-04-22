@@ -1,0 +1,5 @@
+services:
+    eikona.tessa.factory.value.tessa:
+        class: Eikona\Tessa\ConnectorBundle\AttributeType\Factory\TessaValueFactory
+        tags:
+            - { name: akeneo.pim.enrichment.factory.product_value }

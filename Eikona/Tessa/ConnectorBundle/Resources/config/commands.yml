@@ -1,0 +1,8 @@
+services:
+  Eikona\Tessa\ConnectorBundle\Command\TessaNotificationQueueCommand:
+    class: Eikona\Tessa\ConnectorBundle\Command\TessaNotificationQueueCommand
+    arguments:
+      - '@eikona.tessa.notification_queue.service'
+      - '@eikona.tessa'
+    tags:
+      - { name: console.command, command: 'eikona_media:tessa:notification_queue:execute'}

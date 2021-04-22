@@ -1,0 +1,9 @@
+extensions:
+    pim-menu-tessa:
+        module: eikona/tessa/connector/menu/tab-tessa
+        parent: pim-menu
+        position: 39 # Vor Importe
+        targetZone: mainMenu
+        # TODO: aclResourceId: pim_importexport_import_profile_index
+        config:
+          title: tessa.configuration.tab.label

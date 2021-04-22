@@ -1,0 +1,11 @@
+parameters:
+    pim_datagrid.product.attribute_type.eikona_catalog_tessa:
+        column:
+            type:          product_value_field
+            # frontend_type wird zu "oro/datagrid/eikona-catalog-tessa-cell" aufgelöst (siehe config/requirejs.yml)
+            frontend_type: eikona-catalog-tessa
+        filter:
+            # Filter ist in config/datagrid/filters.yml definiert
+            type:          product_value_tessa
+            ftype:         boolean
+        sorter: ~

@@ -1,0 +1,12 @@
+parameters:
+  eikona.tessa.workflow.presenter.tessa_assets.class: Eikona\Tessa\ConnectorBundle\Presenter\AssetsCollectionPresenter
+
+services:
+  eikona.tessa.workflow.presenter.tessa_assets:
+    class: '%eikona.tessa.workflow.presenter.tessa_assets.class%'
+    arguments:
+      - '@akeneo_assetmanager.infrastructure.persistence.repository.asset'
+      - '@pim_catalog.repository.cached_attribute'
+      - '@router'
+    tags:
+      - { name: pimee_workflow.presenter }

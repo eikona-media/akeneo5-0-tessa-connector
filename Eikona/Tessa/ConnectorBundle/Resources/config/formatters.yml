@@ -1,0 +1,9 @@
+services:
+    eikona.tessa.datagrid.extension.formatter.property.product_value.eikona_catalog_tessa:
+        class: Eikona\Tessa\ConnectorBundle\DataGrid\Formatter\Property\ProductValue\TessaProperty
+        arguments:
+            - '@twig'
+            - '@translator'
+            - '@eikona.tessa'
+        tags:
+            - { name: oro_datagrid.extension.formatter.property, type: product_value_tessa }
