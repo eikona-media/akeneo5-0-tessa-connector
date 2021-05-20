@@ -1,0 +1,11 @@
+services:
+    pim_catalog.query.elasticsearch.filter.eikona_catalog_tessa:
+        class: 'Eikona\Tessa\ConnectorBundle\Elasticsearch\Filter\Attribute\TessaAssetFilter'
+        arguments:
+            - '@pim_catalog.validator.helper.attribute'
+            - ['eikona_catalog_tessa']
+            - ['EMPTY', 'NOT EMPTY']
+        tags:
+            - { name: 'pim_catalog.elasticsearch.query.product_filter', priority: 30 }
+            - { name: 'pim_catalog.elasticsearch.query.product_model_filter', priority: 30 }
+            - { name: 'pim_catalog.elasticsearch.query.product_and_product_model_filter', priority: 30 }

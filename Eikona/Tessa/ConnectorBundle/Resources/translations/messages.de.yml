@@ -1,0 +1,8 @@
+eikona_catalog_tessa: 'TESSA CONNECT'
+
+tessa:
+  error:
+    not available: |
+      Entschuldigung, leider kann Ihr TESSA nicht erreicht werden!
+
+      Bitte versuchen Sie es später noch einmal.

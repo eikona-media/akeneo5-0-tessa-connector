@@ -1,0 +1,48 @@
+services:
+  pim_enrich.normalizer.file:
+    class: Eikona\Tessa\ConnectorBundle\Extension\Normalizer\Standard\FileNormalizer
+    tags:
+      - { name: pim_internal_api_serializer.normalizer }
+
+  # ProductNormalizer ohne Berechtigungsabfragen (1)
+  eikona.tessa.query.get_associated_product_codes_by_product:
+    class: 'Akeneo\Pim\Enrichment\Bundle\Storage\Sql\Product\GetAssociatedProductCodesByProductFromDB'
+    arguments:
+      - '@database_connection'
+      - '%pim_catalog.entity.association.class%'
+
+  # ProductNormalizer ohne Berechtigungsabfragen (2)
+  eikona.tessa.normalizer.standard.product.associations:
+    class: '%pim_catalog.normalizer.standard.product.associations.class%'
+    arguments:
+      - '@eikona.tessa.query.get_associated_product_codes_by_product'
+
+  # ProductNormalizer ohne Berechtigungsabfragen (3)
+  eikona.tessa.normalizer.standard.product:
+    class: '%pim_catalog.normalizer.standard.product.class%'
+    arguments:
+      - '@pim_catalog.normalizer.standard.product.properties'
+      - '@eikona.tessa.normalizer.standard.product.associations'
+      - '@pim_catalog.normalizer.standard.product.quantified_associations'
+
+  # Attribut
+  eikona.media.tessa.normalizer.attribute:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\AttributeNormalizer
+    decorates: pim_enrich.normalizer.attribute
+    arguments:
+      - '@eikona.media.tessa.normalizer.attribute.inner'
+    calls:
+      - setTessa: ['@eikona.tessa']
+    tags:
+      - { name: pim_internal_api_serializer.normalizer, priority: 89 }
+
+  # Attribut
+  eikona.media.tessa.normalizer.standard.attribute:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\AttributeNormalizer
+    decorates: pim_catalog.normalizer.standard.attribute
+    arguments:
+      - '@eikona.media.tessa.normalizer.standard.attribute.inner'
+    calls:
+      - setTessa: ['@eikona.tessa']
+    tags:
+      - { name: pim_serializer.normalizer, priority: 89 }

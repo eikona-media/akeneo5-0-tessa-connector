@@ -1,0 +1,53 @@
+pim_enrich.entity.attribute.property.type.eikona_catalog_tessa: 'TESSA CONNECT'
+
+tessa:
+  asset management:
+    title: TESSA Asset Management
+    confirm: Speichern
+    cancel: Abbrechen
+    asset: Asset
+    assets: Assets
+    choose: Assets verwalten
+    choosen: ausgewählt
+    remove: Entfernen
+    mark_removable: Zum Entfernen vormerken
+    unmark_removable: Nicht mehr entfernen
+  configuration:
+    base_url:
+      label: API-URL
+      description: Url der TESSA API
+    ui_url:
+      label: Tessa-URL
+      description: URL der TESSA Anwendung
+    username:
+      label: Benutzername
+      description: TESSA Benutzername für den API Zugriff
+    apikey:
+      label: API Schlüssel
+      description: TESSA API Schlüssel für den API Zugriff
+    systemidentifier:
+      label: TESSA System Kennung
+      description: TESSA System Kennung
+    syncinbackground:
+      label: Im Hintergrund synchronisieren
+      description: Informationen mit TESSA im Hintergrund blockweise synchronisieren
+    userusedbytessa:
+      label: Benutzername für Akeneo-API
+      description: Akeneo Benutzer, der von TESSA für den Zugriff auf die Akeneo-API verwendet wird
+    disableasseteditinginakeneoui:
+      label: Bearbeitung von Assets in Akeneo UI deaktivieren
+      description: Deaktiviert die Bearbeitung von Assets in der Akeneo UI. Assets können nur noch über den Asset-Dialog editiert werden.
+    tab:
+      label: TESSA
+    link:
+      label: EIKONA Akeneo TESSA Connector
+  attribute:
+      max_assets:
+          label: Maximale Assets
+      tessa_export_url:
+          label: Export Url
+  datagrid:
+    cell:
+      assets: "{{ count }} Asset|{{ count }} Assets"
+  action:
+    gallery: TESSA Galerie

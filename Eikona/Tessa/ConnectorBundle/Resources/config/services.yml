@@ -1,0 +1,89 @@
+services:
+    eikona.tessa:
+        class: 'Eikona\Tessa\ConnectorBundle\Tessa'
+        arguments:
+            - '@oro_config.global'
+            - '@kernel'
+            - '@logger'
+            - '@eikona.tessa.notification_normalizer'
+
+    eikona.utilities.math:
+        class: Eikona\Tessa\ConnectorBundle\Utilities\Math
+
+    eikona.utilities.id_prefixer:
+        class: Eikona\Tessa\ConnectorBundle\Utilities\IdPrefixer
+
+    eikona.utilities.link_generator:
+        class: Eikona\Tessa\ConnectorBundle\Utilities\LinkGenerator
+        arguments:
+            - '@eikona.tessa.auth_guard'
+            - '@eikona.tessa'
+            - '@pim_catalog.repository.cached_attribute'
+
+    eikona.utilities.link_parser:
+        class: Eikona\Tessa\ConnectorBundle\Utilities\LinkParser
+        arguments:
+            - '@pim_catalog.repository.cached_attribute'
+
+    eikona.tessa.connector.provider.field.mam:
+        class: Eikona\Tessa\ConnectorBundle\Enrich\Provider\Field\MamFieldProvider
+        tags:
+            - { name: pim_enrich.provider.field, priority: 90 }
+
+    eikona.tessa.auth_guard:
+        class: 'Eikona\Tessa\ConnectorBundle\Security\AuthGuard'
+        arguments:
+            - '@eikona.tessa'
+            - '@eikona.utilities.math'
+            - '@logger'
+
+    eikona.tessa.external_api.serializer.normalizer.product:
+        class: Eikona\Tessa\ConnectorBundle\Normalizer\ExternalApi\ProductNormalizer
+        arguments:
+            - '@pim_catalog.normalizer.standard.product'
+            - '@pim_api.repository.attribute'
+            - '@router'
+            - '@request_stack'
+            - '@eikona.utilities.id_prefixer'
+        tags:
+            - { name: pim_external_api_serializer.normalizer, priority: 91 }
+
+    eikona.tessa.external_api.serializer.normalizer.product_model:
+        class: Eikona\Tessa\ConnectorBundle\Normalizer\ExternalApi\ProductNormalizer
+        arguments:
+            - '@pim_catalog.normalizer.standard.product_model'
+            - '@pim_api.repository.attribute'
+            - '@router'
+            - '@request_stack'
+            - '@eikona.utilities.id_prefixer'
+        tags:
+            - { name: pim_external_api_serializer.normalizer, priority: 91 }
+
+    eikona.tessa.external_api.serializer.normalizer.channel:
+        class: Eikona\Tessa\ConnectorBundle\Normalizer\ExternalApi\ChannelNormalizer
+        arguments:
+            - '@pim_catalog.normalizer.standard.channel'
+            - '@request_stack'
+        tags:
+            - { name: pim_external_api_serializer.normalizer, priority: 91 }
+
+    eikona.tessa.external_api.serializer.normalizer.category:
+        class: Eikona\Tessa\ConnectorBundle\Normalizer\ExternalApi\CategoryNormalizer
+        arguments:
+            - '@pim_catalog.normalizer.standard.category'
+            - '@request_stack'
+        tags:
+            - { name: pim_external_api_serializer.normalizer, priority: 91 }
+
+    eikona.tessa.notification_queue.service:
+        class: Eikona\Tessa\ConnectorBundle\Services\TessaNotificationQueueService
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@eikona.tessa'
+
+    eikona.tessa.security.event_listener.add_csp:
+        class: Eikona\Tessa\ConnectorBundle\EventListener\AddContentSecurityPolicyListener
+        arguments:
+            - '@eikona.tessa'
+        tags:
+            - { name: kernel.event_subscriber, priority: -1 }

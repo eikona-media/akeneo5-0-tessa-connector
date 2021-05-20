@@ -1,0 +1,6 @@
+pim_reference_entity:
+  attribute:
+    validation:
+      tessa:
+        max_assets:
+          should_be_an_integer: 'Der Wert sollte eine ganze Zahl sein.'

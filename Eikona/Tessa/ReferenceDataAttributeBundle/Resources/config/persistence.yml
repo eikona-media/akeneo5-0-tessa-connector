@@ -1,0 +1,5 @@
+services:
+  eikona.media.tessa.referencedataattribute.infrastructure.persistence.record.transformer.tessa_connector_value:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Record\TessaValueTransformer
+    tags:
+      - { name: akeneo_referenceentity.connector_value_transformer }

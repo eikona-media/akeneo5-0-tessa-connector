@@ -1,0 +1,5 @@
+services:
+  eikona.media.tessa.referencedataattribute.infrastructure.connector.api.record_value_tessa_type_validator:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Record\TessaValueValidator
+    tags:
+      - { name: akeneo_referenceentity.connector.api.record_value_validator }

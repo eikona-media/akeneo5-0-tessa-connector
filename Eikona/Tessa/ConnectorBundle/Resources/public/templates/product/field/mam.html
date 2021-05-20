@@ -1,0 +1,44 @@
+<div class="EikonAssetGallery <%= isReadOnly ? 'readonly' : '' %>">
+    <header class="AknAssetCollectionField-header AknButtonList AknButtonList--right">
+        <span class="AknButtonList-item AknButton AknButton--apply AknButton--withIcon <% if (isReadOnly) { %>AknButton--disabled<% } %> add-asset icons-holder-text">
+            <%= _.__('tessa.asset management.choose') %>
+        </span>
+    </header>
+    <input name="asset-sids" type="text" placeholder="sids" value="<%= value.data %>">
+    <ul class="AknAssetCollectionField-list <%= assets.length == 0 ? 'empty' : '' %>">
+        <% _.each(assets, function(item){ %>
+        <li class="asset-thumbnail-item AknAssetCollectionField-listItem ui-sortable-handle <% if (item.markedToRemove) { %>EikonAssetGallery-listitem--markedToRemove<% } %>">
+            <!--suppress CssUnknownTarget -->
+            <a target="_blank" href="<%- item.linkUrl %>">
+                <div class="AknAssetCollectionField-assetThumbnail asset-thumbnail EikonAssetThumbnail"
+                     style="background-image: url('<%- item.url %>')">
+                </div>
+            </a>
+
+            <% if (canEditAssetsInAkeneoUi && !isReadOnly) { %>
+                <% if (item.markedToRemove) { %>
+                <div class="AknButton AknButton--important AknButton--micro AknButton-squareIcon AknButton-squareIcon--undo AknAssetCollectionField-icon remove-item js-remove-asset"
+                     data-asset-id="<%= item.id %>"
+                     title="<%= _.__('tessa.asset management.unmark_removable') %>">
+                </div>
+                <% } else { %>
+                <div class="AknButton AknButton--important AknButton--micro AknButton-squareIcon AknButton-squareIcon--delete AknAssetCollectionField-icon remove-item js-remove-asset"
+                     data-asset-id="<%= item.id %>"
+                     title="<%= _.__('tessa.asset management.mark_removable') %>">
+                </div>
+                <% } %>
+            <% } %>
+        </li>
+        <% }); %>
+    </ul>
+    <div class="placeholder">
+        <img src="/bundles/pimui/images/Default-picture.svg" alt="upload icon">
+    </div>
+    <div class="clearfix"></div>
+    <footer>
+        <%= assets.length %> <%= assets.length == 1 ?
+        _.__('tessa.asset management.asset') :
+        _.__('tessa.asset management.assets') %>
+        <%= _.__('tessa.asset management.choosen') %>
+    </footer>
+</div>

@@ -1,0 +1,33 @@
+config:
+    paths:
+        eikona/tessa/connector/eikona-mam-field:                    eikonatessaconnector/js/product/field/mam-field
+        eikona/tessa/connector/templates/product/field/mam:         eikonatessaconnector/templates/product/field/mam.html
+        eikona/tessa/connector/templates/asset-selection/form:      eikonatessaconnector/templates/mam-asset-selection/form.html
+        eikona/tessa/connector/mam-asset-selection-form:            eikonatessaconnector/js/mam-asset-selection/form
+        eikona/tessa/connector/system/configuration:                eikonatessaconnector/js/form/system
+        eikona/tessa/connector/template/system/group/configuration: eikonatessaconnector/js/templates/system/group/configuration.html
+        eikona/tessa/connector/attributes/product-info:             eikonatessaconnector/js/product/form/attributes/product-info
+        pim/media-url-generator:                                    eikonatessaconnector/js/generator/media-url-generator
+        pim/media-url-generator-base:                               pimui/js/generator/media-url-generator
+        eikona/tessa/connector/menu/tab-tessa:                      eikonatessaconnector/js/menu/tab-tessa
+
+        eikona/tessa/connector/product-edit-form/gallery-link:                  eikonatessaconnector/js/product/form/gallery-link
+        eikona/tessa/connector/template/product-edit-form/gallery-link:         eikonatessaconnector/templates/product/form/gallery-link.html
+        eikona/tessa/connector/product-model-edit-form/gallery-link:            eikonatessaconnector/js/product-model/form/gallery-link
+        eikona/tessa/connector/template/product-model-edit-form/gallery-link:   eikonatessaconnector/templates/product-model/form/gallery-link.html
+
+        # Wenn man eigene Attribute im Datagrid rendern möchte, müssen diese als "oro/datagrid/<attribute>-cell" registriert werden
+        # Der Name kommt aus der Datagrid Attribut-Typ Definition (siehe config/datagrid/attribute_types.yml) und wird dort ohne "-cell" angegeben
+        oro/datagrid/eikona-catalog-tessa-cell:                     eikonatessaconnector/js/datagrid/cell/eikona-catalog-tessa-cell
+        eikona/tessa/connector/datagrid/cell/template:              eikonatessaconnector/templates/datagrid/cell/template.html
+        eikona/tessa/connector/templates/menu/tab-tessa:            eikonatessaconnector/templates/menu/tab-tessa.html
+
+    config:
+        pim/form/common/attributes/create-button:
+            attribute_icons:
+                eikona_catalog_tessa:          tessa
+        pim/attribute-edit-form/type-specific-form-registry:
+            formNames:
+                eikona_catalog_tessa:
+                    create: pim-attribute-form-tessa
+                    edit:   pim-attribute-form-tessa

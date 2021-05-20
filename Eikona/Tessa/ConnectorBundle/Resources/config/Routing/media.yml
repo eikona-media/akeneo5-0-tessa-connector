@@ -1,0 +1,20 @@
+eikona_tessa_media_preview:
+    path: /show/{assetId}
+    defaults: { _controller: eikona.tessa.controller.media:previewAction }
+    methods: [GET]
+eikona_tessa_media_detail:
+    path: /detail/{assetId}
+    defaults: { _controller: eikona.tessa.controller.media:detailAction }
+    methods: [GET]
+eikona_tessa_media_gallery_product:
+    path: /gallery/product/{id}
+    defaults: { _controller: eikona.tessa.controller.media:productGalleryAction }
+    methods: [GET]
+eikona_tessa_media_gallery_productmodel:
+    path: /gallery/product-model/{id}
+    defaults: { _controller: eikona.tessa.controller.media:productmodelGalleryAction }
+    methods: [GET]
+eikona_tessa_media_select:
+    path: /select/{data}
+    defaults: { _controller: eikona.tessa.controller.media:selectAction }
+    methods: [GET]

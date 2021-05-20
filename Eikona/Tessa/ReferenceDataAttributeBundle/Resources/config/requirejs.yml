@@ -1,0 +1,14 @@
+config:
+  config:
+    akeneoreferenceentity/application/configuration/attribute:
+      tessa:
+        icon: bundles/eikonatessaconnector/images/attribute/icon-tessa.svg
+        denormalize: '@eikonatessareferencedataattribute/js/reference-entity/attribute/tessa.tsx'
+        reducer: '@eikonatessareferencedataattribute/js/reference-entity/attribute/tessa.tsx'
+        view: '@eikonatessareferencedataattribute/js/reference-entity/attribute/tessa.tsx'
+
+    akeneoreferenceentity/application/configuration/value:
+      tessa:
+        denormalize: '@eikonatessareferencedataattribute/js/reference-entity/record/tessa.tsx'
+        view: '@eikonatessareferencedataattribute/js/reference-entity/record/tessa.tsx'
+        cell: '@eikonatessareferencedataattribute/js/reference-entity/record/tessa.tsx'

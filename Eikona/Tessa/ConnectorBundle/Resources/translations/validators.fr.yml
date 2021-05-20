@@ -1,0 +1,2 @@
+The placeholder "{SCOPE}" is not allowed because the attribute is not scopable.: "Le caractère de remplacement \"{SCOPE}\" n'est pas autorisé car l'attribut ne dépend pas du canal."
+"Invalid placeholder(s): \"{{invalidPlaceholders}}\". Allowed placeholders are: {{allowedPlaceholders}}.": "Place(s) non valable(s): \"{{invalidPlaceholders}}\". Les caractères de remplissage autorisés sont: {{allowedPlaceholders}}."

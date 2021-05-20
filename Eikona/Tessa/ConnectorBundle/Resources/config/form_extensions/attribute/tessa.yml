@@ -1,0 +1,66 @@
+extensions:
+    pim-attribute-form-tessa:
+        module: pim/common/simple-view
+        config:
+            template: pim/template/common/drop-zone
+
+    pim-attribute-form-tessa-common-usable-as-grid-filter:
+        module: pim/form/common/fields/boolean
+        parent: pim-attribute-form-tessa
+        targetZone: content
+        position: 70
+        config:
+            fieldName: useable_as_grid_filter
+            label: pim_enrich.entity.attribute.property.useable_as_grid_filter
+
+    pim-attribute-form-tessa-type-specific-params:
+        module: pim/common/simple-view
+        parent: pim-attribute-form-tessa
+        targetZone: content
+        position: 100
+        config:
+            template: pim/template/form/tab/section
+            templateParams:
+                sectionTitle: pim_enrich.entity.attribute.module.edit.type_specific
+                dropZone: content
+
+    pim-attribute-form-tessa-type-specific-params-export-url:
+        module: pim/form/common/fields/text
+        parent: pim-attribute-form-tessa-type-specific-params
+        targetZone: content
+        position: 100
+        config:
+            fieldName: tessa_export_url
+            label: tessa.attribute.tessa_export_url.label
+
+    pim-attribute-form-tessa-validation-params:
+        module: pim/common/simple-view
+        parent: pim-attribute-form-tessa
+        targetZone: content
+        position: 110
+        config:
+            template: pim/template/form/tab/section
+            templateParams:
+                sectionTitle: pim_enrich.entity.attribute.module.edit.validation
+                dropZone: content
+
+    pim-attribute-form-tessa-validation-params-max-assets:
+        module: pim/form/common/fields/text
+        parent: pim-attribute-form-tessa-validation-params
+        targetZone: content
+        position: 100
+        config:
+            fieldName: max_characters
+            label: tessa.attribute.max_assets.label
+
+    pim-attribute-form-tessa-validation-params-allowed-extensions:
+        module: pim/form/common/fields/select
+        parent: pim-attribute-form-tessa-validation-params
+        targetZone: content
+        position: 110
+        config:
+            fieldName: allowed_extensions
+            label: pim_enrich.entity.attribute.property.allowed_extensions
+            choices: [gif, jfif, jif, jpeg, jpg, pdf, png, psd, tif, tiff]
+            isMultiple: true
+            defaultValue: []

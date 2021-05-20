@@ -1,0 +1,35 @@
+{
+  "name": "eikona-media/akeneo5-0-tessa-connector",
+  "type": "symfony-bundle",
+  "description": "Extension to connect TESSA to Akeneo",
+  "keywords": [
+    "pim",
+    "akeneo",
+    "ecommerce",
+    "integration",
+    "mam",
+    "dam",
+    "eikona",
+    "tessa"
+  ],
+  "homepage": "https://www.tessa-dam.de",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "EIKONA Media",
+      "homepage": "https://www.eikona-media.de"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "akeneo/pim-community-dev": "~5.0.0",
+    "ext-json": "*",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Eikona\\Tessa\\ConnectorBundle\\": "Eikona/Tessa/ConnectorBundle/",
+      "Eikona\\Tessa\\ReferenceDataAttributeBundle\\": "Eikona/Tessa/ReferenceDataAttributeBundle/"
+    }
+  }
+}

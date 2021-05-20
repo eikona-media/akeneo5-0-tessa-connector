@@ -1,0 +1,54 @@
+services:
+
+  # Attribute tessa
+  eikona.media.tessa.referencedataattribute.factory.create_tessa_attribute_command_factory:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\CreateTessaAttributeCommandFactory
+    tags:
+      - { name: akeneo_referenceentity.create_attribute_command_factory }
+
+  eikona.media.tessa.referencedataattribute.factory.tessa_attribute_factory:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\TessaAttributeFactory
+    arguments:
+      - '@eikona.tessa'
+    tags:
+      - { name: akeneo_referenceentity.attribute_factory }
+
+  eikona.media.tessa.referencedataattribute.infrastructure.persistence.hydrator.attribute.tessa_attribute_hydrator:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\TessaAttributeHydrator
+    arguments:
+      - '@database_connection'
+      - '@eikona.tessa'
+    tags:
+      - { name: akeneo_referenceentity.attribute_hydrator }
+
+  eikona.media.tessa.referencedataattribute.factory.edit_tessa_value_command_factory:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Record\EditTessaValueCommandFactory
+    tags:
+      - { name: akeneo_referenceentity.edit_record_value_command_factory }
+
+  eikona.media.tessa.referencedataattribute.edit_record.record_value_updater.tessa:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Record\TessaUpdater
+    tags:
+      - { name: akeneo_referenceentity.record_value_updater }
+
+  eikona.media.tessa.referencedataattribute.infrastructure.persistence.record.hydrator.tessa:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Record\TessaDataHydrator
+    tags:
+      - { name: akeneo_referenceentity.data_hydrator }
+
+  # Property max_assets
+  eikona.media.tessa.referencedataattribute.edit_attribute.attribute_updater.tessa_max_assets_updater:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxAssets\TessaMaxAssetsUpdater
+    tags:
+      - { name: akeneo_referenceentity.attribute_updater, priority: 120 }
+
+  eikona.media.tessa.referencedataattribute.factory.edit_tessa_max_assets_command_factory:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxAssets\EditTessaMaxAssetsCommandFactory
+    tags:
+      - { name: akeneo_referenceentity.edit_attribute_command_factory, priority: 120 }
+
+  # Property allowed_extensions
+  eikona.media.tessa.referencedataattribute.edit_attribute.attribute_updater.allowed_extensions_updater:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\AllowedExtensions\AllowedExtensionsUpdater
+    tags:
+      - { name: akeneo_referenceentity.attribute_updater, priority: 110 }

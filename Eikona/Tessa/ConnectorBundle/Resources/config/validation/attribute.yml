@@ -1,0 +1,5 @@
+Akeneo\Pim\Structure\Component\Model\Attribute:
+  constraints:
+      - Eikona\Tessa\ConnectorBundle\Validator\Constraints\EikonaTessaAttributeConstraint:
+          groups:
+              - eikona_catalog_tessa

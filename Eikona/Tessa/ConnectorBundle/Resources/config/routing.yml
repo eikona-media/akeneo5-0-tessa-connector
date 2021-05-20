@@ -1,0 +1,6 @@
+tessa_media:
+    resource: 'Routing/media.yml'
+    prefix: /tessa/media
+tessa:
+    resource: 'Routing/tessa.yml'
+    prefix: /tessa

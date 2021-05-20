@@ -1,0 +1,7 @@
+services:
+    eikona.tessa.catalog.attributetype.tessa:
+      class: Eikona\Tessa\ConnectorBundle\AttributeType\TessaType
+      arguments:
+          - text
+      tags:
+          - { name: pim_catalog.attribute_type, alias: eikona_catalog_tessa, entity: '%pim_catalog.entity.product.class%' }

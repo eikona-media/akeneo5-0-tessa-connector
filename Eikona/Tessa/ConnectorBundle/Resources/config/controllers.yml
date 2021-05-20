@@ -1,0 +1,17 @@
+services:
+  eikona.tessa.controller.tessa:
+    class: Eikona\Tessa\ConnectorBundle\Controller\TessaController
+    public: true
+    arguments:
+      - '@eikona.tessa'
+
+  eikona.tessa.controller.media:
+    class: Eikona\Tessa\ConnectorBundle\Controller\MediaFileController
+    public: true
+    arguments:
+      - '@eikona.tessa'
+      - '@eikona.tessa.auth_guard'
+      - '@pim_catalog.repository.product'
+      - '@pim_catalog.repository.product_model'
+      - '@eikona.utilities.id_prefixer'
+      - '@security.token_storage'

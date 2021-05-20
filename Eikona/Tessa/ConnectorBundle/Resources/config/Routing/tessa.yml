@@ -1,0 +1,4 @@
+eikona_tessa:
+  path: /
+  defaults: { _controller: eikona.tessa.controller.tessa:gotoTessaAction }
+  methods: [GET]

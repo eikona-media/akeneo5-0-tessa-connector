@@ -1,0 +1,12 @@
+parameters:
+    eikona.tessa.eikona_catalog_tessa_filter.class: Eikona\Tessa\ConnectorBundle\DataGrid\Filter\ProductValue\TessaBooleanFilter
+
+services:
+    # Filter für das Datagrid (wird in config/datagrid/attribute_types.yml verwendet)
+    eikona.tessa.eikona_catalog_tessa_filter:
+          class: '%eikona.tessa.eikona_catalog_tessa_filter.class%'
+          arguments:
+              - '@form.factory'
+              - '@pim_filter.product_utility'
+          tags:
+              - { name: oro_filter.extension.orm_filter.filter, type: product_value_tessa }

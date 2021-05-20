@@ -1,0 +1,44 @@
+pim_enrich.entity.attribute.property.type.eikona_catalog_tessa: 'TESSA CONNECT'
+
+tessa:
+  asset management:
+    title: Gestion des actifs TESSA
+    confirm: Enregistrer
+    cancel: Annuler
+    asset: Actif
+    assets: Actifs
+    choose: Gérer les actifs
+    choosen: Sélectionné
+    mark_removable: Sélectionner pour suppression
+    unmark_removable: Annuler supression
+  configuration:
+    base_url:
+      label: URL de l'API
+      description: URL vers le TESSA api
+    ui_url:
+      label: TESSA URL
+      description: Url à l'application TESSA
+    username:
+      label: Nom d’utilisateur
+      description: TESSA nom d'utilisateur pour l'accès à l'API
+    apikey:
+      label: Clé API
+      description: tessa ™ api key pour l'accès à l'API
+    systemidentifier:
+      label: Identifiant du système TESSA
+      description: identifiant système TESSA
+    syncinbackground:
+      label: Synchronisation en arrière-plan
+      description: Synchroniser l'information avec TESSA dans l'arrière-plan bloc par bloc
+    userusedbytessa:
+      label: Nom d'utilisateur pour Akeneo API
+      description: Utilisateur d'Akeneo utilisé par TESSA pour accéder à l'API d'Akeneo
+    disableasseteditinginakeneoui:
+      label: Désactiver l'édition des actifs dans l'interface utilisateur d'Akeneo
+      description: Désactive l'édition des actifs dans l'interface utilisateur Akeneo. Les actifs ne peuvent être édités que via la boîte de dialogue des actifs.
+    tab:
+      label: TESSA
+    link:
+      label: Connecteur EIKONA Akeneo TESSA
+    action:
+      gallery: TESSA galerie
