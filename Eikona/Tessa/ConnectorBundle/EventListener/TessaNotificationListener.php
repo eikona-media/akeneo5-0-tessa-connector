@@ -14,18 +14,16 @@ use Akeneo\Pim\Enrichment\Component\Product\Model\ProductInterface;
 use Akeneo\Pim\Enrichment\Component\Product\Model\ProductModelInterface;
 use Akeneo\Pim\Enrichment\Component\Product\Repository\ProductModelRepositoryInterface;
 use Akeneo\Pim\Enrichment\Component\Product\Repository\ProductRepositoryInterface;
+use Akeneo\Pim\WorkOrganization\Workflow\Component\Model\PublishedProductInterface;
 use Akeneo\Tool\Component\Classification\Model\CategoryInterface;
 use Akeneo\Tool\Component\StorageUtils\Event\RemoveEvent;
 use Akeneo\UserManagement\Bundle\Context\UserContext;
 use Doctrine\ORM\EntityManager;
 use Eikona\Tessa\ConnectorBundle\Services\TessaNotificationQueueService;
 use Eikona\Tessa\ConnectorBundle\Tessa;
-use Psr\Http\Message\RequestInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\Router;
 
 class TessaNotificationListener
 {
@@ -102,7 +100,7 @@ class TessaNotificationListener
             return;
         }
 
-        if ($subject instanceof ProductInterface) {
+        if ($subject instanceof ProductInterface && !($subject instanceof PublishedProductInterface)) {
             if ($this->tessa->isBackgroundSyncActive()) {
                 $this->tessaNotificationQueueService->addToQueue(
                     $subject->getIdentifier(),
@@ -235,7 +233,7 @@ class TessaNotificationListener
             $this->tessa->notifySingleDeletion($id, $subject->getCode(), Tessa::TYPE_CATEGORY);
         } elseif ($subject instanceof ChannelInterface) {
             $this->tessa->notifySingleDeletion($id, $subject->getCode(), Tessa::TYPE_CHANNEL);
-        } elseif ($subject instanceof ProductInterface) {
+        } elseif ($subject instanceof ProductInterface && !($subject instanceof PublishedProductInterface)) {
             $this->tessa->notifySingleDeletion($id, $subject->getIdentifier(), Tessa::TYPE_PRODUCT);
         } elseif ($subject instanceof GroupInterface) {
             $this->tessa->notifySingleDeletion($id, $subject->getCode(), Tessa::TYPE_GROUP);
