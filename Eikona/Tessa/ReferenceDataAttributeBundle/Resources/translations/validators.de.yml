@@ -4,3 +4,5 @@ pim_reference_entity:
       tessa:
         max_assets:
           should_be_an_integer: 'Der Wert sollte eine ganze Zahl sein.'
+        max_displayed_assets:
+          should_be_an_integer: 'Der Wert sollte eine ganze Zahl sein.'

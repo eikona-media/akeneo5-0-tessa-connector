@@ -33,6 +33,10 @@ class CreateTessaAttributeCommandFactory extends AbstractCreateAttributeCommandF
             ? $normalizedCommand['allowed_extensions']
             : AttributeAllowedExtensions::ALL_ALLOWED;
 
+        $maxDisplayedAssets = isset($normalizedCommand['max_displayed_assets'])
+            ? (int)$normalizedCommand['max_displayed_assets']
+            : null;
+
         $command = new CreateTessaAttributeCommand(
             $normalizedCommand['reference_entity_identifier'],
             $normalizedCommand['code'],
@@ -41,7 +45,8 @@ class CreateTessaAttributeCommandFactory extends AbstractCreateAttributeCommandF
             $normalizedCommand['value_per_channel'],
             $normalizedCommand['value_per_locale'],
             $maxAssets,
-            $allowedExtensions
+            $allowedExtensions,
+            $maxDisplayedAssets
         );
 
         return $command;

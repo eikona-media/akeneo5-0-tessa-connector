@@ -1,11 +1,15 @@
 <div class="datagrid-cell-tessa">
-    <div class="image">
-        <img src="<%= url %>">
-    </div>
-    <% if (assets.length > 1) { %>
+    <% if (displayedAssets.length) { %>
+        <% displayedAssets.forEach(function(asset) { %>
+            <div class="image">
+                <img src="<%= asset.url %>">
+            </div>
+        <% }); %>
+    <% } %>
+    <% if (additionalAssets.length) { %>
         <div class="more">
-            + <%= assets.length - 1 %>
+            <%= displayedAssets.length ? '+' : '' %>
+            <%= additionalAssets.length %>
         </div>
     <% } %>
 </div>
-

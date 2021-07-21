@@ -46,6 +46,8 @@ tessa:
           label: Max assets
       tessa_export_url:
           label: Export Url
+      max_displayed_assets:
+          label: Max displayed assets in grid view
   datagrid:
     cell:
       assets: "{{ count }} asset|{{ count }} assets"

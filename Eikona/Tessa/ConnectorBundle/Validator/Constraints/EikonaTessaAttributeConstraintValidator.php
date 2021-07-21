@@ -35,34 +35,55 @@ class EikonaTessaAttributeConstraintValidator extends ConstraintValidator
         if ($attribute instanceof AttributeInterface &&
             ($attribute->getType() === AttributeTypes::TESSA)) {
 
-            $exportUrl = $attribute->getProperty(TessaType::ATTRIBUTE_EXPORT_URL);
+            $this->checkExportUrl($attribute, $constraint);
+            $this->checkMaxDisplayedAssets($attribute, $constraint);
+        }
+    }
 
-            if ($exportUrl === null) {
-                return;
-            }
+    private function checkExportUrl($attribute, Constraint $constraint)
+    {
+        $exportUrl = $attribute->getProperty(TessaType::ATTRIBUTE_EXPORT_URL);
 
-            if (!preg_match_all('/({\w+})/', $exportUrl, $matches)) {
-                return;
-            }
+        if ($exportUrl === null) {
+            return;
+        }
 
-            $allowedPlaceholders = ['{ASSET_ID}', '{SCOPE}'];
-            $placeholders = array_values(array_unique($matches[1]));
-            $unknownPlaceholders = array_diff($placeholders, $allowedPlaceholders);
-            $isScopePlaceholderUsed = in_array('{SCOPE}', $placeholders);
+        if (!preg_match_all('/({\w+})/', $exportUrl, $matches)) {
+            return;
+        }
 
-            if (!empty($unknownPlaceholders)) {
-                $this->context->buildViolation($constraint->invalidPlaceholder)
-                    ->atPath(TessaType::ATTRIBUTE_EXPORT_URL)
-                    ->setParameter('{{invalidPlaceholders}}', implode(', ', $unknownPlaceholders))
-                    ->setParameter('{{allowedPlaceholders}}', implode(' & ', $allowedPlaceholders))
-                    ->addViolation();
-            }
+        $allowedPlaceholders = ['{ASSET_ID}', '{SCOPE}'];
+        $placeholders = array_values(array_unique($matches[1]));
+        $unknownPlaceholders = array_diff($placeholders, $allowedPlaceholders);
+        $isScopePlaceholderUsed = in_array('{SCOPE}', $placeholders);
 
-            if (!$attribute->isScopable() && $isScopePlaceholderUsed) {
-                $this->context->buildViolation($constraint->cannotUseScopePlaceholder)
-                    ->atPath(TessaType::ATTRIBUTE_EXPORT_URL)
-                    ->addViolation();
-            }
+        if (!empty($unknownPlaceholders)) {
+            $this->context->buildViolation($constraint->invalidPlaceholder)
+                ->atPath(TessaType::ATTRIBUTE_EXPORT_URL)
+                ->setParameter('{{invalidPlaceholders}}', implode(', ', $unknownPlaceholders))
+                ->setParameter('{{allowedPlaceholders}}', implode(' & ', $allowedPlaceholders))
+                ->addViolation();
+        }
+
+        if (!$attribute->isScopable() && $isScopePlaceholderUsed) {
+            $this->context->buildViolation($constraint->cannotUseScopePlaceholder)
+                ->atPath(TessaType::ATTRIBUTE_EXPORT_URL)
+                ->addViolation();
+        }
+    }
+
+    private function checkMaxDisplayedAssets($attribute, Constraint $constraint)
+    {
+        $maxDisplayedAssets = $attribute->getProperty(TessaType::ATTRIBUTE_MAX_DISPLAYED_ASSETS);
+
+        if ($maxDisplayedAssets === null || $maxDisplayedAssets === '') {
+            return;
+        }
+
+        if (!preg_match('/^[1-9][0-9]*$/', $maxDisplayedAssets)) {
+            $this->context->buildViolation($constraint->invalidMaxDisplayedAssets)
+                ->atPath(TessaType::ATTRIBUTE_MAX_DISPLAYED_ASSETS)
+                ->addViolation();
         }
     }
 }

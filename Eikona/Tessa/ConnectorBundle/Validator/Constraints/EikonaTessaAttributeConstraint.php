@@ -19,6 +19,7 @@ class EikonaTessaAttributeConstraint extends Constraint
 {
     public $cannotUseScopePlaceholder = 'The placeholder "{SCOPE}" is not allowed because the attribute is not scopable.';
     public $invalidPlaceholder = 'Invalid placeholder(s): "{{invalidPlaceholders}}". Allowed placeholders are: {{allowedPlaceholders}}.';
+    public $invalidMaxDisplayedAssets = 'Invalid amount. Please provide a number or leave empty.';
 
     /**
      * {@inheritDoc}

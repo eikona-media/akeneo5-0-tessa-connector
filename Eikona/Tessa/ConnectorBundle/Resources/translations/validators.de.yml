@@ -1,2 +1,3 @@
 The placeholder "{SCOPE}" is not allowed because the attribute is not scopable.: "Der Platzhalter \"{SCOPE}\" ist nicht erlaubt, weil das Attribut nicht kanalabhängig ist."
 "Invalid placeholder(s): \"{{invalidPlaceholders}}\". Allowed placeholders are: {{allowedPlaceholders}}.": "Ungültige(r) Platzhalter: \"{{invalidPlaceholders}}\". Erlaubte Platzhalter sind: {{allowedPlaceholders}}."
+Invalid amount. Please provide a number or leave empty.: Ungültiger Wert. Geben Sie einen numerischen Wert an oder lassen Sie das Feld leer.
