@@ -18,6 +18,9 @@ class CreateTessaAttributeCommand extends AbstractCreateAttributeCommand
     /** @var array */
     public $allowedExtensions;
 
+    /** @var null|int */
+    public $maxDisplayedAssets;
+
     public function __construct(
         string $referenceEntityIdentifier,
         string $code,
@@ -26,7 +29,8 @@ class CreateTessaAttributeCommand extends AbstractCreateAttributeCommand
         bool $valuePerChannel,
         bool $valuePerLocale,
         ?int $maxAssets,
-        array $allowedExtensions
+        array $allowedExtensions,
+        ?int $maxDisplayedAssets
     )
     {
         parent::__construct(
@@ -40,5 +44,6 @@ class CreateTessaAttributeCommand extends AbstractCreateAttributeCommand
 
         $this->maxAssets = $maxAssets;
         $this->allowedExtensions = $allowedExtensions;
+        $this->maxDisplayedAssets = $maxDisplayedAssets;
     }
 }

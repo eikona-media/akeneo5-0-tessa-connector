@@ -63,6 +63,44 @@ class TessaMaxAssets {
   }
 }
 
+type NormalizedTessaMaxDisplayedAssets = number | null;
+
+class TessaMaxDisplayedAssets {
+  public constructor(readonly maxDisplayedAssets: number | null | undefined ) {
+    if (!(null === maxDisplayedAssets || undefined === maxDisplayedAssets || typeof maxDisplayedAssets === 'number')) {
+      throw new InvalidArgumentError('MaxDisplayedAssets need to be a valid integer or null');
+    }
+    Object.freeze(this);
+  }
+
+  public static isValid(value: any): boolean {
+    return (!isNaN(parseInt(value)) && 0 <= parseInt(value)) || '' === value || null === value;
+  }
+
+  public static createFromNormalized(normalizedMaxDisplayedAssets: NormalizedTessaMaxDisplayedAssets) {
+    return new TessaMaxDisplayedAssets(normalizedMaxDisplayedAssets);
+  }
+
+  public normalize() {
+    return this.maxDisplayedAssets === undefined ? null : this.maxDisplayedAssets;
+  }
+
+  public static createFromString(maxDisplayedAssets: string) {
+    if (!TessaMaxDisplayedAssets.isValid(maxDisplayedAssets)) {
+      throw new InvalidArgumentError('MaxLength need to be a valid integer');
+    }
+    return new TessaMaxDisplayedAssets('' === maxDisplayedAssets ? null : parseInt(maxDisplayedAssets));
+  }
+
+  public stringValue(): string {
+    return (null === this.maxDisplayedAssets || undefined === this.maxDisplayedAssets) ? '' : this.maxDisplayedAssets.toString();
+  }
+
+  public isNull(): boolean {
+    return null === this.maxDisplayedAssets;
+  }
+}
+
 /**
  * This type is an aggregate of all the custom properties. Here we only have one so it could seems useless but
  * here is an example with multiple properties:
@@ -71,12 +109,12 @@ class TessaMaxAssets {
  *
  * In the example above, a additional property of a text attribute could be a Max length, is textarea, is rich text editor, ...
  */
-export type TessaAdditionalProperty = TessaMaxAssets | AllowedExtensions;
+export type TessaAdditionalProperty = TessaMaxAssets | AllowedExtensions | TessaMaxDisplayedAssets;
 
 /**
  * Same for the non normalized form
  */
-export type NormalizedTessaAdditionalProperty = NormalizedTessaMaxAssets | NormalizedAllowedExtensions;
+export type NormalizedTessaAdditionalProperty = NormalizedTessaMaxAssets | NormalizedAllowedExtensions | NormalizedTessaMaxDisplayedAssets;
 
 /**
  * This interface will represent your normalized attribute (usually coming from the backend but also used in the reducer)
@@ -85,6 +123,7 @@ export interface NormalizedTessaAttribute extends NormalizedAttribute {
   type: 'tessa';
   max_assets: NormalizedTessaMaxAssets;
   allowed_extensions: NormalizedAllowedExtensions;
+  max_displayed_assets: NormalizedTessaMaxDisplayedAssets;
   canEditAssetsInAkeneoUi: boolean;
 }
 
@@ -94,6 +133,7 @@ export interface NormalizedTessaAttribute extends NormalizedAttribute {
 export interface TessaAttribute extends Attribute {
   maxAssets: TessaMaxAssets;
   allowedExtensions: AllowedExtensions;
+  maxDisplayedAssets: TessaMaxDisplayedAssets;
   canEditAssetsInAkeneoUi: boolean;
 
   normalize(): NormalizedTessaAttribute;
@@ -119,6 +159,7 @@ export class ConcreteTessaAttribute extends ConcreteAttribute implements TessaAt
     is_required: boolean,
     readonly maxAssets: TessaMaxAssets,
     readonly allowedExtensions: AllowedExtensions,
+    readonly maxDisplayedAssets: TessaMaxDisplayedAssets,
     readonly canEditAssetsInAkeneoUi: boolean
   ) {
     super(
@@ -139,6 +180,10 @@ export class ConcreteTessaAttribute extends ConcreteAttribute implements TessaAt
 
     if (!(allowedExtensions instanceof AllowedExtensions)) {
       throw new InvalidArgumentError('Attribute expects a AllowedExtension as allowedExtension');
+    }
+
+    if (!(maxDisplayedAssets instanceof TessaMaxDisplayedAssets)) {
+      throw new InvalidArgumentError('Attribute expects a TessaMaxDisplayedAssets as maxDisplayedAssets')
     }
 
     /**
@@ -162,6 +207,7 @@ export class ConcreteTessaAttribute extends ConcreteAttribute implements TessaAt
       normalizedTessaAttribute.is_required,
       TessaMaxAssets.createFromNormalized(normalizedTessaAttribute.max_assets),
       AllowedExtensions.createFromNormalized(normalizedTessaAttribute.allowed_extensions),
+      TessaMaxDisplayedAssets.createFromNormalized(normalizedTessaAttribute.max_displayed_assets),
       normalizedTessaAttribute.canEditAssetsInAkeneoUi
     );
   }
@@ -175,6 +221,7 @@ export class ConcreteTessaAttribute extends ConcreteAttribute implements TessaAt
       type: 'tessa',
       max_assets: this.maxAssets.normalize(),
       allowed_extensions: this.allowedExtensions.normalize(),
+      max_displayed_assets: this.maxDisplayedAssets.normalize(),
       canEditAssetsInAkeneoUi: this.canEditAssetsInAkeneoUi
     };
   }
@@ -201,6 +248,9 @@ const tessaAttributeReducer = (
     case 'allowed_extensions':
       const allowed_extensions = propertyValue as NormalizedAllowedExtensions;
       return {...normalizedAttribute, allowed_extensions};
+    case 'max_displayed_assets':
+      const max_displayed_assets = propertyValue as NormalizedTessaMaxDisplayedAssets;
+      return {...normalizedAttribute, max_displayed_assets};
 
     default:
       break;
@@ -265,6 +315,38 @@ const TessaAttributeView = ({attribute, onAdditionalPropertyUpdated, onSubmit, e
           />
         </div>
         {getErrorsView(errors, 'maxAssets')}
+      </div>
+      <div className="AknFieldContainer" data-code="maxDisplayedAssets">
+        <div className="AknFieldContainer-header AknFieldContainer-header--light">
+          <label className="AknFieldContainer-label"
+                 htmlFor="pim_reference_entity.attribute.edit.input.tessa.max_displayed_assets">
+            {__('pim_reference_entity.attribute.edit.input.tessa.max_displayed_assets')}
+          </label>
+        </div>
+        <div className="AknFieldContainer-inputContainer">
+          <input
+            type="text"
+            autoComplete="off"
+            className={inputTextClassName}
+            id="pim_reference_entity.attribute.edit.input.tessa.max_displayed_assets"
+            maxLength={11}
+            name="max_displayed_assets"
+            readOnly={!rights.attribute.edit}
+            value={attribute.maxDisplayedAssets.stringValue()}
+            onKeyPress={(event: React.KeyboardEvent<HTMLInputElement>) => {
+              if (Key.Enter === event.key) onSubmit();
+            }}
+            onChange={(event: React.FormEvent<HTMLInputElement>) => {
+              if (!TessaMaxDisplayedAssets.isValid(event.currentTarget.value)) {
+                event.currentTarget.value = attribute.maxDisplayedAssets.stringValue();
+                event.preventDefault();
+                return;
+              }
+              onAdditionalPropertyUpdated('max_displayed_assets', TessaMaxDisplayedAssets.createFromString(event.currentTarget.value));
+            }}
+          />
+        </div>
+        {getErrorsView(errors, 'maxDisplayedAssets')}
       </div>
       <div className="AknFieldContainer" data-code="allowedExtensions">
         <div className="AknFieldContainer-header AknFieldContainer-header--light">

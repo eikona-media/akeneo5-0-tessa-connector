@@ -20,6 +20,7 @@ use Akeneo\ReferenceEntity\Domain\Model\LabelCollection;
 use Akeneo\ReferenceEntity\Domain\Model\ReferenceEntity\ReferenceEntityIdentifier;
 use Eikona\Tessa\ConnectorBundle\Tessa;
 use Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxAssets\AttributeTessaMaxAssets;
+use Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxDisplayedAssets\AttributeTessaMaxDisplayedAssets;
 
 class TessaAttribute extends AbstractAttribute
 {
@@ -34,6 +35,9 @@ class TessaAttribute extends AbstractAttribute
     /** @var  AttributeAllowedExtensions */
     private $allowedExtensions;
 
+    /** @var AttributeTessaMaxDisplayedAssets */
+    private $maxDisplayedAssets;
+
     protected function __construct(
         AttributeIdentifier $identifier,
         ReferenceEntityIdentifier $referenceEntityIdentifier,
@@ -44,7 +48,8 @@ class TessaAttribute extends AbstractAttribute
         AttributeValuePerChannel $valuePerChannel,
         AttributeValuePerLocale $valuePerLocale,
         AttributeTessaMaxAssets $maxAssets,
-        AttributeAllowedExtensions $allowedExtensions
+        AttributeAllowedExtensions $allowedExtensions,
+        AttributeTessaMaxDisplayedAssets $maxDisplayedAssets
     )
     {
         parent::__construct(
@@ -60,6 +65,7 @@ class TessaAttribute extends AbstractAttribute
 
         $this->maxAssets = $maxAssets;
         $this->allowedExtensions = $allowedExtensions;
+        $this->maxDisplayedAssets = $maxDisplayedAssets;
     }
 
     public static function createTessa(
@@ -72,7 +78,8 @@ class TessaAttribute extends AbstractAttribute
         AttributeValuePerChannel $valuePerChannel,
         AttributeValuePerLocale $valuePerLocale,
         AttributeTessaMaxAssets $maxAssets,
-        AttributeAllowedExtensions $allowedExtensions
+        AttributeAllowedExtensions $allowedExtensions,
+        AttributeTessaMaxDisplayedAssets $maxDisplayedAssets
     )
     {
         return new self(
@@ -85,7 +92,8 @@ class TessaAttribute extends AbstractAttribute
             $valuePerChannel,
             $valuePerLocale,
             $maxAssets,
-            $allowedExtensions
+            $allowedExtensions,
+            $maxDisplayedAssets
         );
     }
 
@@ -102,6 +110,11 @@ class TessaAttribute extends AbstractAttribute
     public function setAllowedExtensions(AttributeAllowedExtensions $allowedExtensions): void
     {
         $this->allowedExtensions = $allowedExtensions;
+    }
+
+    public function setMaxDisplayedAssets(AttributeTessaMaxDisplayedAssets $maxDisplayedAssets): void
+    {
+        $this->maxDisplayedAssets = $maxDisplayedAssets;
     }
 
     /**
@@ -123,6 +136,7 @@ class TessaAttribute extends AbstractAttribute
             [
                 'max_assets' => $this->maxAssets->normalize(),
                 'allowed_extensions' => $this->allowedExtensions->normalize(),
+                'max_displayed_assets' => $this->maxDisplayedAssets->normalize(),
                 'canEditAssetsInAkeneoUi' => $canEditAssetsInAkeneoUi,
             ]
         );

@@ -140,28 +140,49 @@ const memo = (React as any).memo;
  *
  * It returns the JSX View to display the cell of your custom Record Value in the grid.
  */
-const TessaCellView: CellView = memo(({value}: { value: NormalizedValue }) => {
+const TessaCellView: CellView = memo(({ column, value }: { column: any, value: NormalizedValue }) => {
   const tessaData = denormalize(value.data);
-  const data = tessaData.normalize();
+  const tessaAssetIds = tessaData.normalize();
 
-  if (data.length === 0) {
+  if (tessaAssetIds.length === 0) {
     return '';
   }
 
-  const firstAssetId = data[0];
-  const url = routing.generate('eikona_tessa_media_preview', {assetId: firstAssetId});
+  let maxDisplayedAssets = column.attribute.max_displayed_assets;
+  maxDisplayedAssets = Number.isInteger(maxDisplayedAssets) ? maxDisplayedAssets : 1;
+
+  const displayedAssets = tessaAssetIds
+    .slice(0, maxDisplayedAssets)
+    .map((tessaAssetId) => ({
+      url: routing.generate('eikona_tessa_media_preview', {assetId: tessaAssetId}),
+      assetId: tessaAssetId
+    }))
+
+  const displayedAssetsRendered = displayedAssets.map((asset) => {
+    return <div className="image">
+      <img src={asset.url} alt={asset.assetId} />
+    </div>;
+  })
+
+  const additionalAssets = tessaAssetIds
+    .slice(maxDisplayedAssets)
+    .map((tessaAssetId) => ({
+      assetId: tessaAssetId
+    }))
+
+  let additionalAssetsRendered = null;
+  if (additionalAssets.length) {
+    additionalAssetsRendered = <div className="more">
+      {displayedAssets.length ? '+' : ''}
+      {additionalAssets.length}
+    </div>
+  }
 
   return (
     <div className="AknGrid-bodyCellContainer">
       <div className="datagrid-cell-tessa">
-        <div className="image">
-          <img src={url} alt={firstAssetId} />
-        </div>
-        {data.length > 1 && (
-          <div className="more">
-            + {data.length - 1}
-          </div>
-        )}
+        {displayedAssetsRendered}
+        {additionalAssetsRendered}
       </div>
     </div>
   );

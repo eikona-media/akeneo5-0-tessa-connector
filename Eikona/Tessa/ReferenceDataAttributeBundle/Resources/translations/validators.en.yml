@@ -4,3 +4,5 @@ pim_reference_entity:
       tessa:
         max_assets:
           should_be_an_integer: 'This value should be an integer.'
+        max_displayed_assets:
+          should_be_an_integer: 'This value should be an integer.'

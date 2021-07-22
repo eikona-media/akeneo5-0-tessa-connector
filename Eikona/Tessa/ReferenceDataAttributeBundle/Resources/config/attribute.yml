@@ -47,6 +47,17 @@ services:
     tags:
       - { name: akeneo_referenceentity.edit_attribute_command_factory, priority: 120 }
 
+  # Property max_displayed_assets
+  eikona.media.tessa.referencedataattribute.edit_attribute.attribute_updater.tessa_max_displayed_assets_updater:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxDisplayedAssets\TessaMaxDisplayedAssetsUpdater
+    tags:
+      - { name: akeneo_referenceentity.attribute_updater, priority: 120 }
+
+  eikona.media.tessa.referencedataattribute.factory.edit_tessa_max_displayed_assets_command_factory:
+    class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxDisplayedAssets\EditTessaMaxDisplayedAssetsCommandFactory
+    tags:
+      - { name: akeneo_referenceentity.edit_attribute_command_factory, priority: 120 }
+
   # Property allowed_extensions
   eikona.media.tessa.referencedataattribute.edit_attribute.attribute_updater.allowed_extensions_updater:
     class: Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\AllowedExtensions\AllowedExtensionsUpdater
