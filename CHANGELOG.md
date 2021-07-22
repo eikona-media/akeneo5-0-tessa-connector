@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+* [feature] Adjust the amount of assets displayed in product grid and reference entity grid
+
 ## 1.0.1 (2021-07-15)
 * [bugfix] fixed error when publishing a product
 
