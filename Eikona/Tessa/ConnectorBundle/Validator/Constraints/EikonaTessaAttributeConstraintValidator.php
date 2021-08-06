@@ -80,7 +80,7 @@ class EikonaTessaAttributeConstraintValidator extends ConstraintValidator
             return;
         }
 
-        if (!preg_match('/^[1-9][0-9]*$/', $maxDisplayedAssets)) {
+        if (!preg_match('/^(0|[1-9][0-9]*)$/', $maxDisplayedAssets)) {
             $this->context->buildViolation($constraint->invalidMaxDisplayedAssets)
                 ->atPath(TessaType::ATTRIBUTE_MAX_DISPLAYED_ASSETS)
                 ->addViolation();
