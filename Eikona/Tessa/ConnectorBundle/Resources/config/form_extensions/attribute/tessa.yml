@@ -33,6 +33,15 @@ extensions:
             fieldName: tessa_export_url
             label: tessa.attribute.tessa_export_url.label
 
+    pim-attribute-form-tessa-type-specific-params-max-displayed_assets:
+        module: pim/form/common/fields/text
+        parent: pim-attribute-form-tessa-type-specific-params
+        targetZone: content
+        position: 110
+        config:
+            fieldName: max_displayed_assets
+            label: tessa.attribute.max_displayed_assets.label
+
     pim-attribute-form-tessa-validation-params:
         module: pim/common/simple-view
         parent: pim-attribute-form-tessa

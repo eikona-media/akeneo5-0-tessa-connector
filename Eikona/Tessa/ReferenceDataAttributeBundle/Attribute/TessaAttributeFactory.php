@@ -22,6 +22,7 @@ use Akeneo\ReferenceEntity\Domain\Model\LabelCollection;
 use Akeneo\ReferenceEntity\Domain\Model\ReferenceEntity\ReferenceEntityIdentifier;
 use Eikona\Tessa\ConnectorBundle\Tessa;
 use Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxAssets\AttributeTessaMaxAssets;
+use Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxDisplayedAssets\AttributeTessaMaxDisplayedAssets;
 
 class TessaAttributeFactory implements AttributeFactoryInterface
 {
@@ -71,7 +72,8 @@ class TessaAttributeFactory implements AttributeFactoryInterface
             AttributeValuePerChannel::fromBoolean($command->valuePerChannel),
             AttributeValuePerLocale::fromBoolean($command->valuePerLocale),
             AttributeTessaMaxAssets::fromInteger($command->maxAssets),
-            AttributeAllowedExtensions::fromList($command->allowedExtensions)
+            AttributeAllowedExtensions::fromList($command->allowedExtensions),
+            AttributeTessaMaxDisplayedAssets::fromInteger($command->maxDisplayedAssets)
         );
 
         $attribute->setTessa($this->tessa);

@@ -46,3 +46,15 @@ services:
       - setTessa: ['@eikona.tessa']
     tags:
       - { name: pim_serializer.normalizer, priority: 89 }
+
+  # Value
+  eikona.media.tessa.normalizer.standard.product.product_value:
+    class: Eikona\Tessa\ConnectorBundle\Normalizer\Standard\Product\ProductValueNormalizer
+    decorates: pim_catalog.normalizer.standard.product.product_value
+    arguments:
+        - '@pim_standard_format_serializer'
+        - '@akeneo.pim.structure.query.get_attributes'
+        - '@eikona.utilities.link_generator'
+    tags:
+        - { name: pim_standard_format_serializer.normalizer, priority: 90 }
+    lazy: true

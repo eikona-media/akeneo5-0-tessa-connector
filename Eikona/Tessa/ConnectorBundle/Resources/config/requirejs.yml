@@ -10,6 +10,7 @@ config:
         pim/media-url-generator:                                    eikonatessaconnector/js/generator/media-url-generator
         pim/media-url-generator-base:                               pimui/js/generator/media-url-generator
         eikona/tessa/connector/menu/tab-tessa:                      eikonatessaconnector/js/menu/tab-tessa
+        eikona/tessa/fetcher/attribute:                             eikonatessaconnector/js/fetcher/attribute-fetcher
 
         eikona/tessa/connector/product-edit-form/gallery-link:                  eikonatessaconnector/js/product/form/gallery-link
         eikona/tessa/connector/template/product-edit-form/gallery-link:         eikonatessaconnector/templates/product/form/gallery-link.html

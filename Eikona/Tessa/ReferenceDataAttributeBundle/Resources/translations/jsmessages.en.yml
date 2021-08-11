@@ -1,2 +1,3 @@
 pim_reference_entity.attribute.type.tessa: TESSA CONNECT
 pim_reference_entity.attribute.edit.input.tessa.max_assets: Max assets
+pim_reference_entity.attribute.edit.input.tessa.max_displayed_assets: Max displayed assets

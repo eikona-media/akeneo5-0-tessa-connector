@@ -57,8 +57,10 @@ class AttributeNormalizer implements NormalizerInterface
 
         $exportUrl = $attribute->getProperty(TessaType::ATTRIBUTE_EXPORT_URL);
         $normalizedAttribute[TessaType::ATTRIBUTE_EXPORT_URL] = $exportUrl;
+        $maxDisplayedAssets = $attribute->getProperty(TessaType::ATTRIBUTE_MAX_DISPLAYED_ASSETS);
+        $normalizedAttribute[TessaType::ATTRIBUTE_MAX_DISPLAYED_ASSETS] = $maxDisplayedAssets;
 
-        $normalizedAttribute['meta']['canEditAssetsInAkeneoUi'] = !$this->tessa->isAssetEditingInAkeneoUiDisabled();;
+        $normalizedAttribute['meta']['canEditAssetsInAkeneoUi'] = !$this->tessa->isAssetEditingInAkeneoUiDisabled();
 
         return $normalizedAttribute;
     }

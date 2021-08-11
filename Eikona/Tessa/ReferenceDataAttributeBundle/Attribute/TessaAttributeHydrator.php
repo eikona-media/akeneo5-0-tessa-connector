@@ -24,6 +24,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use Eikona\Tessa\ConnectorBundle\Tessa;
 use Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxAssets\AttributeTessaMaxAssets;
+use Eikona\Tessa\ReferenceDataAttributeBundle\Attribute\Property\MaxDisplayedAssets\AttributeTessaMaxDisplayedAssets;
 
 class TessaAttributeHydrator extends AbstractAttributeHydrator
 {
@@ -47,6 +48,27 @@ class TessaAttributeHydrator extends AbstractAttributeHydrator
         $this->tessa = $tessa;
     }
 
+    protected function checkRowProperties(array $row): void
+    {
+        $additionalKeys = array_keys($row);
+        if (in_array('additional_properties', $additionalKeys)) {
+            $additionalKeys = array_keys(json_decode($row['additional_properties'], true));
+            unset($row['additional_properties']);
+        }
+
+        $actualKeys = array_merge(array_keys($row), $additionalKeys);
+        $missingKeys = array_diff($this->getExpectedProperties(), $actualKeys, ['max_displayed_assets']);
+
+        if (!empty($missingKeys)) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Impossible to hydrate the attribute because some information is missing: %s',
+                    implode(', ', $missingKeys)
+                )
+            );
+        }
+    }
+
     protected function getExpectedProperties(): array
     {
         return [
@@ -61,6 +83,7 @@ class TessaAttributeHydrator extends AbstractAttributeHydrator
             'attribute_type',
             'max_assets',
             'allowed_extensions',
+            'max_displayed_assets'
         ];
     }
 
@@ -71,6 +94,14 @@ class TessaAttributeHydrator extends AbstractAttributeHydrator
         );
 
         $row['allowed_extensions'] = $row['additional_properties']['allowed_extensions'];
+
+        if (isset($row['additional_properties']['max_displayed_assets'])) {
+            $row['max_displayed_assets'] = Type::getType(Type::INTEGER)->convertToPhpValue(
+                $row['additional_properties']['max_displayed_assets'], $platform
+            );
+        } else {
+            $row['max_displayed_assets'] = null;
+        }
 
         return $row;
     }
@@ -91,7 +122,8 @@ class TessaAttributeHydrator extends AbstractAttributeHydrator
             AttributeValuePerChannel::fromBoolean($row['value_per_channel']),
             AttributeValuePerLocale::fromBoolean($row['value_per_locale']),
             $maxAssets,
-            AttributeAllowedExtensions::fromList($row['allowed_extensions'])
+            AttributeAllowedExtensions::fromList($row['allowed_extensions']),
+            AttributeTessaMaxDisplayedAssets::fromInteger($row['max_displayed_assets'])
         );
 
         $attribute->setTessa($this->tessa);
