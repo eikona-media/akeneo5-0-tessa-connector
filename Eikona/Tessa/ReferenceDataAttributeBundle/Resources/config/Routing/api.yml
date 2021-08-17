@@ -1,0 +1,4 @@
+eikona_tessa_api_Reference_Data_product_ids:
+  path: /reference-entity-record-ids
+  defaults: { _controller: eikona.tessa.controller.apireferencedata:getReferenceEntityRecordIds }
+  methods: [ GET ]
