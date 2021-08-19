@@ -74,17 +74,36 @@ class ApiController
 
     /**
      * @param string $sql
+     * @param array $data
      * @return array
      * @throws \Doctrine\DBAL\DBALException
      */
-    protected function executeSql(string $sql, array $data = array()): array
+    protected function executeSql(string $sql, array $data = array(), $idToInt = true): array
     {
-
         $conn = $this->entityManager->getConnection();
         $stmt = $conn->prepare($sql);
         $stmt->execute($data);
+        if ($idToInt === true) {
+            return ($this->idToInt($stmt->fetchAll()));
+        }
         return ($stmt->fetchAll());
 
     }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    protected function idToInt(array $data): array
+    {
+        $anz = count($data);
+        for ($i = 0; $i < $anz; $i++) {
+            if (isset($data[$i]['id']) && is_numeric($data[$i]['id'])) {
+                $data[$i]['id'] = (int)$data[$i]['id'];
+            }
+        }
+        return $data;
+    }
+
 
 }

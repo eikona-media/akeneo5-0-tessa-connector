@@ -18,7 +18,7 @@ class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiControll
     public function getReferenceEntityRecordIds(): Response
     {
 
-        $sql = 'select distinct reference_entity_identifier as refid from `akeneo_reference_entity_record`';
+        $sql = 'select distinct identifier as refid from `akeneo_reference_entity_reference_entity`';
         $res = $this->executeSql($sql);
         if (count($res) === 0) {
             return new JsonResponse(array());
@@ -30,6 +30,8 @@ class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiControll
             $subRes = $this->executeSql($sql, array('refid' => $value['refid']));
             if (count($subRes) > 0) {
                 $data[$value['refid']] = $subRes;
+            } else {
+                $data[$value['refid']] = array();
             }
 
         }
