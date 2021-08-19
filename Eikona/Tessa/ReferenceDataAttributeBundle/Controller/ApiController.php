@@ -23,9 +23,31 @@ class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiControll
         if (count($res) === 0) {
             return new JsonResponse(array());
         }
+        return new JsonResponse($this->getReferenceEntityRecords($res));
+    }
+
+    /**
+     * @param string $refid
+     * @return JsonResponse
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getSingleReferenceEntityRecordIds(string $refid): JsonResponse
+    {
+
+        return new JsonResponse($this->getReferenceEntityRecords(array(array('refid' => $refid))));
+
+    }
+
+    /**
+     * @param array $refIds
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    private function getReferenceEntityRecords(array $refIds): array
+    {
         $data = array();
 
-        foreach ($res as $value) {
+        foreach ($refIds as $value) {
             $sql = 'SELECT code,identifier FROM `akeneo_reference_entity_record` where `reference_entity_identifier`= :refid';
             $subRes = $this->executeSql($sql, array('refid' => $value['refid']));
             if (count($subRes) > 0) {
@@ -35,7 +57,7 @@ class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiControll
             }
 
         }
-        return new JsonResponse($data);
+        return $data;
     }
 
 }
