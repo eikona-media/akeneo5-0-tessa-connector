@@ -18,7 +18,7 @@ class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiControll
     public function getReferenceEntityRecordIds(): Response
     {
 
-        $sql = 'select distinct identifier as refid from `akeneo_reference_entity_reference_entity`';
+        $sql = 'select identifier as refid from `akeneo_reference_entity_reference_entity`';
         $res = $this->executeSql($sql);
         if (count($res) === 0) {
             return new JsonResponse(array());
@@ -28,11 +28,21 @@ class ApiController extends \Eikona\Tessa\ConnectorBundle\Controller\ApiControll
 
     /**
      * @param string $refid
-     * @return JsonResponse
+     * @return JsonResponse | Response
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getSingleReferenceEntityRecordIds(string $refid): JsonResponse
+    public function getSingleReferenceEntityRecordIds(string $refid)
     {
+
+        if ($refid===''){
+            return new Response('Empty ID given',404);
+        }
+
+        $sql = 'select identifier as refid from `akeneo_reference_entity_reference_entity` where identifier = :identifier';
+        $res = $this->executeSql($sql,array('identifier'=>$refid));
+        if (count($res) === 0) {
+            return new Response('Unknown ID given',404);
+        }
 
         return new JsonResponse($this->getReferenceEntityRecords(array(array('refid' => $refid))));
 
