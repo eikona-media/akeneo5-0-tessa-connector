@@ -1,0 +1,3 @@
+tessa_api_reference_data:
+  resource: "Routing/api.yml"
+  prefix: /api/rest/v1/tessa

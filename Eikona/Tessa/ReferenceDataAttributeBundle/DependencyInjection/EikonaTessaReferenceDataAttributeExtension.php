@@ -29,5 +29,6 @@ class EikonaTessaReferenceDataAttributeExtension extends Extension
         $loader->load('json_schema_validators.yml');
         $loader->load('notification_normalizers.yml');
         $loader->load('persistence.yml');
+        $loader->load('controllers.yml');
     }
 }

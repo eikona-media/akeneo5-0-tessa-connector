@@ -1,0 +1,9 @@
+eikona_tessa_api_Reference_Data_record_ids:
+  path: /reference-entity-record-ids
+  defaults: { _controller: eikona.tessa.controller.apireferencedata:getReferenceEntityRecordIds }
+  methods: [ GET ]
+
+eikona_tessa_api_Reference_Data_single_record_ids:
+  path: /reference-entity-record-ids/{refid}
+  defaults: { _controller: eikona.tessa.controller.apireferencedata:getSingleReferenceEntityRecordIds }
+  methods: [ GET ]

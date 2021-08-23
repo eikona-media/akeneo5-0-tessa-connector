@@ -1,0 +1,16 @@
+eikona_tessa_api_product_ids:
+    path: /product-ids
+    defaults: { _controller: eikona.tessa.controller.api:getProductIds }
+    methods: [ GET ]
+eikona_tessa_api_product_model_ids:
+    path: /product-model-ids
+    defaults: { _controller: eikona.tessa.controller.api:getProductModelIds }
+    methods: [ GET ]
+eikona_tessa_api_category_ids:
+    path: /category-ids
+    defaults: { _controller: eikona.tessa.controller.api:getCategoryIds }
+    methods: [ GET ]
+eikona_tessa_api_channel_ids:
+    path: /channel-ids
+    defaults: { _controller: eikona.tessa.controller.api:getChannelIds }
+    methods: [ GET ]

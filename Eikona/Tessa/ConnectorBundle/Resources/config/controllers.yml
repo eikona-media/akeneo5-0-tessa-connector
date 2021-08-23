@@ -15,3 +15,9 @@ services:
       - '@pim_catalog.repository.product_model'
       - '@eikona.utilities.id_prefixer'
       - '@security.token_storage'
+
+  eikona.tessa.controller.api:
+    class: Eikona\Tessa\ConnectorBundle\Controller\ApiController
+    public: true
+    arguments:
+      - '@doctrine.orm.entity_manager'

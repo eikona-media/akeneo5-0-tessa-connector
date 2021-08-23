@@ -43,7 +43,7 @@ class TessaValueTransformer implements ConnectorValueTransformerInterface
         $assetIds = empty($data) ? [] : $data;
 
         $assetUrls = array_map(function($assetId) use ($normalizedValue) {
-            return $this->linkGenerator->getAssetTessaDownloadUrl($assetId, $normalizedValue['scope']);
+            return $this->linkGenerator->getAssetTessaDownloadUrl($assetId, $normalizedValue['channel']);
         }, $assetIds);
 
         return [
