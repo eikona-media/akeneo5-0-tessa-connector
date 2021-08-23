@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+* [bugfix] Fixed channel for tessa assets in entity records (when fetching them via api)
+
 ## 1.1.0 (2021-08-11)
 * [feature] Adjust the amount of assets displayed in product grid and reference entity grid
 * [feature] Added asset download links in API
