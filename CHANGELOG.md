@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.3.0
+## Unreleased
+
+* [bugfix] Fixed attribute export (removed column "meta")
+
+## 1.3.0 (2021-09-06)
 
 * [feature] added setting "Locale specific" for Tessa Connect attribute in akeneo
 
