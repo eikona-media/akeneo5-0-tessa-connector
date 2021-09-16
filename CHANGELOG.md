@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.1 (2021-09-16)
 
 * [bugfix] Fixed attribute export (removed column "meta")
 
