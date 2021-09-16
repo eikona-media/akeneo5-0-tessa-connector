@@ -60,7 +60,9 @@ class AttributeNormalizer implements NormalizerInterface
         $maxDisplayedAssets = $attribute->getProperty(TessaType::ATTRIBUTE_MAX_DISPLAYED_ASSETS);
         $normalizedAttribute[TessaType::ATTRIBUTE_MAX_DISPLAYED_ASSETS] = $maxDisplayedAssets;
 
-        $normalizedAttribute['meta']['canEditAssetsInAkeneoUi'] = !$this->tessa->isAssetEditingInAkeneoUiDisabled();
+        if ($format === 'internal_api' || $format === 'standard') {
+            $normalizedAttribute['meta']['canEditAssetsInAkeneoUi'] = !$this->tessa->isAssetEditingInAkeneoUiDisabled();
+        }
 
         return $normalizedAttribute;
     }
