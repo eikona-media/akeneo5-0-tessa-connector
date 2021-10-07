@@ -2,7 +2,7 @@ services:
     pim_catalog.query.elasticsearch.filter.eikona_catalog_tessa:
         class: 'Eikona\Tessa\ConnectorBundle\Elasticsearch\Filter\Attribute\TessaAssetFilter'
         arguments:
-            - '@pim_catalog.validator.helper.attribute'
+            - '@pim_catalog.validator.helper.attribute_filter'
             - ['eikona_catalog_tessa']
             - ['EMPTY', 'NOT EMPTY']
         tags:

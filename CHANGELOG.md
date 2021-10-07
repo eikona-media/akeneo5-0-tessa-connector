@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.2 (202110-07)
+
+* [bugfix] Fixed error when deleting a Tessa attribute
+
 ## 1.3.1 (2021-09-16)
 
 * [bugfix] Fixed attribute export (removed column "meta")
