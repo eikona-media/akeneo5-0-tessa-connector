@@ -1,0 +1,28 @@
+services:
+  eikona.tessa.shared_catalogs.command.sync_product_assets:
+    class: Eikona\Tessa\SharedCatalogsBundle\Commands\SyncProductAssetsCommand
+    arguments:
+      - '@eikona.tessa.shared_catalogs.service.product_and_product_model_processor'
+      - '@pim_catalog.repository.product_without_permission'
+      - '@pim_catalog.repository.product_model_without_permission'
+      - '@doctrine.orm.entity_manager'
+      - '@pim_catalog.saver.product_without_permission'
+      - '@pim_catalog.saver.product_model_without_permission'
+    tags:
+      - { name: console.command }
+
+  eikona.tessa.shared_catalogs.command.regnerate_asset_previews:
+    class: Eikona\Tessa\SharedCatalogsBundle\Commands\RegenerateAssetPreviewsCommand
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@eikona.tessa.shared_catalogs.service.asset_manager'
+    tags:
+      - { name: console.command }
+
+  eikona.tessa.shared_catalogs.command.update_asset_links:
+    class: Eikona\Tessa\SharedCatalogsBundle\Commands\UpdateAssetLinksCommand
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@eikona.tessa.shared_catalogs.service.asset_manager'
+    tags:
+      - { name: console.command }

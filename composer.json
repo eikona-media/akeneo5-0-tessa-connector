@@ -29,6 +29,7 @@
   "autoload": {
     "psr-4": {
       "Eikona\\Tessa\\ConnectorBundle\\": "Eikona/Tessa/ConnectorBundle/",
+      "Eikona\\Tessa\\SharedCatalogsBundle\\": "Eikona/Tessa/SharedCatalogsBundle/",
       "Eikona\\Tessa\\ReferenceDataAttributeBundle\\": "Eikona/Tessa/ReferenceDataAttributeBundle/"
     }
   }

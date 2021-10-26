@@ -1,0 +1,39 @@
+parameters:
+  env(TESSA_CONNECT_SC_SYNC_ENABLED): 'true'
+  env(TESSA_CONNECT_SC_ASSET_FAMILY_CODE): 'tessa'
+  env(TESSA_CONNECT_SC_ASSET_FAMILY_LINK_ATTRIBUTE): 'tessa_url'
+  env(TESSA_CONNECT_SC_ASSET_PRODUCT_ATTRIBUTE_AFFIX): '_asset'
+  eikona.tessa.shared_catalogs.enabled: '%env(bool:TESSA_CONNECT_SC_SYNC_ENABLED)%'
+  eikona.tessa.shared_catalogs.asset_family_code: '%env(TESSA_CONNECT_SC_ASSET_FAMILY_CODE)%'
+  eikona.tessa.shared_catalogs.asset_tessa_link_attribute_code: '%env(TESSA_CONNECT_SC_ASSET_FAMILY_LINK_ATTRIBUTE)%'
+  eikona.tessa.shared_catalogs.product_attribute_affix: '%env(TESSA_CONNECT_SC_ASSET_PRODUCT_ATTRIBUTE_AFFIX)%'
+
+services:
+  eikona.tessa.shared_catalogs.service.asset_manager:
+    class: Eikona\Tessa\SharedCatalogsBundle\Services\AssetManager
+    arguments:
+      - '@eikona.tessa'
+      - '@eikona.utilities.link_generator'
+      - '@akeneo_assetmanager.application.asset.create_asset_handler'
+      - '@akeneo_assetmanager.application.asset.edit_asset_handler'
+      - '@akeneo_assetmanager.application.factory.asset.edit_asset_command_factory'
+      - '@akeneo_assetmanager.application.asset.delete_asset_handler'
+      - '@akeneo_assetmanager.infrastructure.persistence.repository.attribute'
+      - '@pim_catalog.repository.attribute'
+      - '@akeneo_assetmanager.infrastructure.persistence.repository.asset'
+      - '@akeneo_assetmanager.infrastructure.registry.preview_generator'
+      - '@akeneo_assetmanager.infrastructure.search.elasticsearch.asset.index_asset_event_aggregator'
+      - '@akeneo_assetmanager.application.asset.subscribers.compute_asset_transformation_event_aggregator'
+      - '@pim_catalog.saver.product_without_permission'
+      - '%eikona.tessa.shared_catalogs.enabled%'
+      - '%eikona.tessa.shared_catalogs.asset_family_code%'
+      - '%eikona.tessa.shared_catalogs.asset_tessa_link_attribute_code%'
+      - '%eikona.tessa.shared_catalogs.product_attribute_affix%'
+
+  eikona.tessa.shared_catalogs.service.product_and_product_model_processor:
+    class: Eikona\Tessa\SharedCatalogsBundle\Services\ProductAndProductModelProcessor
+    arguments:
+      - '@eikona.tessa.shared_catalogs.service.asset_manager'
+      - '@pim_catalog.repository.attribute'
+      - '@pim_catalog.repository.channel'
+      - '@pim_catalog.repository.locale'

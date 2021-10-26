@@ -1,0 +1,8 @@
+services:
+  eikona.tessa.shared_catalogs.event_subscriber.shared_catalogs:
+    class: Eikona\Tessa\SharedCatalogsBundle\EventSubscriber\SharedCatalogsSubscriber
+    arguments:
+      - '@eikona.tessa.shared_catalogs.service.asset_manager'
+      - '@eikona.tessa.shared_catalogs.service.product_and_product_model_processor'
+    tags:
+      - { name: kernel.event_subscriber }

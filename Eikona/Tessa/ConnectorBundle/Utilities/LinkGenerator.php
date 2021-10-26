@@ -82,14 +82,14 @@ class LinkGenerator
      *
      * @return string
      */
-    public function getAssetTessaDownloadUrl($assetId, $scopeCode): string
+    public function getAssetTessaDownloadUrl($assetId, $scopeCode = null): string
     {
         $key = $this->authGuard->getDownloadAuthToken($assetId, 'download');
 
         return $this->tessa->getBaseUrl()
             . '/ui/download.php'
             . '?asset_system_id=' . $assetId
-            . '&kanal=' . $scopeCode
+            . ($scopeCode !== null ? ('&kanal=' . $scopeCode) : '')
             . '&key=' . $key;
     }
 }
