@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.3.2 (202110-07)
+## 1.3.3 (2012-11-29)
+
+* [bugfix] Fixed Tessate attribute properties form
+
+## 1.3.2 (2021-10-07)
 
 * [bugfix] Fixed error when deleting a Tessa attribute
 
