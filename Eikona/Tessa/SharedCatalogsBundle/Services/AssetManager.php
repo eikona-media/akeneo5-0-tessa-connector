@@ -332,7 +332,9 @@ class AssetManager
         }
 
         // Remove old linkings
-        $productOrProductModel->removeValue($existingValue);
+        if ($existingValue) {
+            $productOrProductModel->removeValue($existingValue);
+        }
 
         // No new linkings -> skip (linkings already removed)
         if (empty($tessaAssetIds)) {

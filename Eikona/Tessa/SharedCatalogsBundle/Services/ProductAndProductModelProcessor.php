@@ -196,10 +196,10 @@ class ProductAndProductModelProcessor
                     $tessaAssetIds
                 );
             }
-
-            // Index and transform (new) assets
-            $this->assetManager->indexAndTransform();
         }
+
+        // Index and transform (new) assets
+        $this->assetManager->indexAndTransform();
     }
 
     /**
