@@ -23,6 +23,13 @@ config:
         eikona/tessa/connector/datagrid/cell/template:              eikonatessaconnector/templates/datagrid/cell/template.html
         eikona/tessa/connector/templates/menu/tab-tessa:            eikonatessaconnector/templates/menu/tab-tessa.html
 
+#        pimee/product-edit-form/main-image: eikonatessaconnector/js/product/form/main-image-ee.ts
+        pim/product-edit-form/main-image:   eikonatessaconnector/js/product/form/main-image.ts
+
+    map:
+        '*':
+            pimee/product-edit-form/main-image:      eikonatessaconnector/js/product/form/main-image-ee.ts
+
     config:
         pim/form/common/attributes/create-button:
             attribute_icons:
@@ -32,3 +39,4 @@ config:
                 eikona_catalog_tessa:
                     create: pim-attribute-form-tessa
                     edit:   pim-attribute-form-tessa
+
