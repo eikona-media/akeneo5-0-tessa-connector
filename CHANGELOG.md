@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.4 (Unreleased)
+## 1.3.4 (2022-01-12)
 
 * [bugfix] Fixed product mainimage
 
