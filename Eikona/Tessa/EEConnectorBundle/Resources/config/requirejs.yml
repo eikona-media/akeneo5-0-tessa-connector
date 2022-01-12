@@ -1,0 +1,3 @@
+config:
+  paths:
+    pimee/product-edit-form/main-image: eikonatessaeeconnector/js/product/form/main-image.ts
