@@ -23,6 +23,8 @@ config:
         eikona/tessa/connector/datagrid/cell/template:              eikonatessaconnector/templates/datagrid/cell/template.html
         eikona/tessa/connector/templates/menu/tab-tessa:            eikonatessaconnector/templates/menu/tab-tessa.html
 
+        pim/product-edit-form/main-image:   eikonatessaconnector/js/product/form/main-image.ts
+
     config:
         pim/form/common/attributes/create-button:
             attribute_icons:
@@ -32,3 +34,4 @@ config:
                 eikona_catalog_tessa:
                     create: pim-attribute-form-tessa
                     edit:   pim-attribute-form-tessa
+

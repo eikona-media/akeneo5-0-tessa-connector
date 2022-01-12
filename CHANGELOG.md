@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.4 (2022-01-12)
+
+* [bugfix] Fixed product mainimage
+
 ## 1.3.3 (2012-11-29)
 
 * [bugfix] Fixed Tessate attribute properties form

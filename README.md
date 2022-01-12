@@ -50,7 +50,15 @@ return [
 
 ```
 
-4) Run the following commands in your project root:
+4) EE Only: Enable the Enterprise bundle in the `config/bundles.php` file:
+```php
+return [
+    // ...
+    Eikona\Tessa\ConnectorBundle\EikonaTessaEEConnectorBundle::class => ['all' => true],
+];
+
+
+5) Run the following commands in your project root:
 ```bash
 php bin/console cache:clear --env=prod --no-warmup
 php bin/console cache:warmup --env=prod
@@ -61,16 +69,16 @@ yarn run less
 yarn run update-extensions
 ```
 
-5) Update your database schema
+6) Update your database schema
 
 ```bash
 php bin/console doctrine:schema:update --dump-sql # Show changes
 php bin/console doctrine:schema:update --force # Update database schema
 ```
 
-6) Configure the Tessa Connector in your Akeneo System Settings.
+7) Configure the Tessa Connector in your Akeneo System Settings.
 
-7) (Optionally) Create a cronjob to synchronize data with TESSA in the background
+8) (Optionally) Create a cronjob to synchronize data with TESSA in the background
 
 This is only necessary if you use the option "Sync in background" in the system settings
 
