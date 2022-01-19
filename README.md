@@ -54,9 +54,9 @@ return [
 ```php
 return [
     // ...
-    Eikona\Tessa\ConnectorBundle\EikonaTessaEEConnectorBundle::class => ['all' => true],
+    Eikona\Tessa\EEConnectorBundle\EikonaTessaEEConnectorBundle::class => ['all' => true],
 ];
-
+```
 
 5) Run the following commands in your project root:
 ```bash
