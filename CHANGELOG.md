@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.6 (2022-01-24)
+## 1.3.6 (2022-01-26)
 
 * [bugfix] Fixed product grid display error when asset id is 0
 
