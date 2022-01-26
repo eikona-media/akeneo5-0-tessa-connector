@@ -17,7 +17,9 @@ class FileNormalizer extends \Akeneo\Pim\Enrichment\Component\Product\Normalizer
     {
         if ($this->isTessaFile($file)) {
             $assetId = $this->getTessaAssetId($file);
-            $assetFilePath = $assetId === null ?: $this->generateTessaFilePath($assetId);
+            $assetFilePath = $assetId !== null
+                ? $this->generateTessaFilePath($assetId)
+                : null;
 
             return [
                 'filePath' => $assetFilePath,
@@ -60,7 +62,7 @@ class FileNormalizer extends \Akeneo\Pim\Enrichment\Component\Product\Normalizer
      */
     protected function getTessaAssetId($assetIds)
     {
-        if (empty($assetIds)) {
+        if (empty($assetIds) && $assetIds !== '0') {
             return null;
         }
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.6 (2022-01-26)
+
+* [bugfix] Fixed product grid display error when asset id is 0
+
+## 1.3.5 (2022-01-19)
+
+* Fixed documentation
+
 ## 1.3.4 (2022-01-12)
 
 * [bugfix] Fixed product mainimage
