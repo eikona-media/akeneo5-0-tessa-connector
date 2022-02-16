@@ -41,6 +41,13 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('scope')->end()
             ->end()
             ->end()
+            # use_http_internally
+            ->arrayNode('use_http_internally')
+            ->children()
+            ->booleanNode('value')->end()
+            ->scalarNode('scope')->end()
+            ->end()
+            ->end()
             # username
             ->arrayNode('username')
             ->children()

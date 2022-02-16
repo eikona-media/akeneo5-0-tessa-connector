@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* [feature] Added option to switch to http for internal communication between Akeneo and Tessa
+
 ## 1.3.6 (2022-01-26)
 
 * [bugfix] Fixed product grid display error when asset id is 0

@@ -41,6 +41,28 @@
 <div class="AknFieldContainer">
     <div class="AknFieldContainer-header">
         <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
+               for="pim_eikona_tessa_connector___use_http_internally">
+            <%- _.__('tessa.configuration.usehttpinternally.label') %>
+        </label>
+    </div>
+    <div class="AknFieldContainer-inputContainer">
+        <div class="switch switch-small" data-on-label="Yes" data-off-label="No">
+            <input
+                id="pim_eikona_tessa_connector___use_http_internally"
+                type="checkbox"
+                name="pim_eikona_tessa_connector___use_http_internally"
+                class="tessa-config"
+            <% if (useHttpInternally) { %> checked<% } %>
+            >
+        </div>
+    </div>
+    <div class="AknFieldContainer-footer">
+        <%- _.__('tessa.configuration.usehttpinternally.description') %>
+    </div>
+</div>
+<div class="AknFieldContainer">
+    <div class="AknFieldContainer-header">
+        <label class="AknFieldContainer-label control-label AknFieldContainer-label required"
                for="pim_eikona_tessa_connector___username">
             <%- _.__('tessa.configuration.username.label') %>
         </label>

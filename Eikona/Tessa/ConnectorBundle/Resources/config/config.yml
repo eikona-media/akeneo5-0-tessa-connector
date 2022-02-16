@@ -6,6 +6,9 @@ pim_eikona_tessa_connector:
         ui_url:
             value: ~
             scope: app
+        use_http_internally:
+            value: false
+            scope: app
         username:
             value: ~
             scope: app

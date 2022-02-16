@@ -19,6 +19,9 @@ tessa:
     ui_url:
       label: Tessa-URL
       description: URL der TESSA Anwendung
+    usehttpinternally:
+      label: HTTP für interne Kommunikation
+      description: Verwende HTTP für die interne Kommunikation zwischen Akeneo und Tessa
     username:
       label: Benutzername
       description: TESSA Benutzername für den API Zugriff
