@@ -42,6 +42,8 @@ define(
             this.getFormData().pim_eikona_tessa_connector___base_url.value : '',
           uiUrl: this.getFormData().pim_eikona_tessa_connector___ui_url ?
             this.getFormData().pim_eikona_tessa_connector___ui_url.value : '',
+          useHttpInternally: this.getFormData().pim_eikona_tessa_connector___use_http_internally ?
+            this.getFormData().pim_eikona_tessa_connector___use_http_internally.value : false,
           username: this.getFormData().pim_eikona_tessa_connector___username ?
             this.getFormData().pim_eikona_tessa_connector___username.value : '',
           apikey: this.getFormData().pim_eikona_tessa_connector___api_key ?

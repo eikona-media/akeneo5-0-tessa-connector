@@ -37,6 +37,9 @@ class Tessa
     /** @var string */
     protected $uiUrl;
 
+    /** @var bool */
+    protected $useHttpInternally = false;
+
     /** @var string */
     protected $username;
 
@@ -88,6 +91,7 @@ class Tessa
         try {
             $this->baseUrl = trim($oroGlobal->get('pim_eikona_tessa_connector.base_url'), ' /');
             $this->uiUrl = trim($oroGlobal->get('pim_eikona_tessa_connector.ui_url'), ' /');
+            $this->useHttpInternally = (bool)$oroGlobal->get('pim_eikona_tessa_connector.use_http_internally');
             $this->username = trim($oroGlobal->get('pim_eikona_tessa_connector.username'));
             $this->accessToken = trim($oroGlobal->get('pim_eikona_tessa_connector.api_key'));
             $this->userId = (int)substr($this->accessToken, 0, strpos($this->accessToken, ':'));
@@ -100,6 +104,7 @@ class Tessa
             // This exception happens when the database is missing (first installion, so nothing to concern about)
             $this->baseUrl = '';
             $this->uiUrl = '';
+            $this->useHttpInternally = false;
             $this->username = '';
             $this->accessToken = '';
             $this->userId = 0;
@@ -128,6 +133,14 @@ class Tessa
     public function getUiUrl()
     {
         return $this->uiUrl;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUseHttpInternally(): bool
+    {
+        return $this->useHttpInternally;
     }
 
     /**
@@ -199,15 +212,17 @@ class Tessa
      */
     public function isAvailable(): bool
     {
-        if (!$this->baseUrl) {
+        $baseUrl = $this->getUrlForInternalCommunication();
+        if (!$baseUrl) {
             return false;
         }
 
-        $ch = curl_init($this->baseUrl);
+        $ch = curl_init($baseUrl);
 
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_NOBODY, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_exec($ch);
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -255,13 +270,14 @@ class Tessa
      */
     public function sendNotificationToTessa(array $payload, $isBulk = false)
     {
-        if (empty($this->baseUrl)) {
+        $baseUrl = $this->getUrlForInternalCommunication();
+        if (empty($baseUrl)) {
             return;
         }
 
         $payload = json_encode($payload);
 
-        $url = $this->baseUrl . '/dienste/akeneo/warteschlange.php';
+        $url = $baseUrl . '/dienste/akeneo/warteschlange.php';
         if ($isBulk) {
             $url .= '?bulk=1';
         }
@@ -275,6 +291,7 @@ class Tessa
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->kernel->isDebug() ? 30 : 0);
         $result = curl_exec($ch);
 
@@ -282,12 +299,28 @@ class Tessa
 
         if ($httpcode !== 200) {
             $this->logger->error(sprintf(
-                'Tessa request failed (http code %i): %s',
+                'Tessa request failed (http code %d): %s',
                 $httpcode,
                 $result
             ));
         }
 
         curl_close($ch);
+    }
+
+    /**
+     * Returns the tessa url for internal communication
+     * Depends on useHttpInternally if http or https is used
+     *
+     * @return string
+     */
+    private function getUrlForInternalCommunication(): string
+    {
+        $url = $this->baseUrl;
+        if (!is_string($url) || !$this->useHttpInternally) {
+            return $url;
+        }
+
+        return preg_replace('/^https/', 'http', $url);
     }
 }
