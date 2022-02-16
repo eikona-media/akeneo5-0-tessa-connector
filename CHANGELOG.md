@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.4.0 (2022-02-16)
 
 * [feature] Added option to switch to http for internal communication between Akeneo and Tessa
 
