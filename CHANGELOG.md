@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.1 (2022-04-07)
+
+* [feature] CSV/XSLX import can now parse urls with "id" parameter (in addition to "asset_system_id")
+* Improved communication with Tessa when opening asset selection dialog
+
 ## 1.4.0 (2022-02-16)
 
 * [feature] Added option to switch to http for internal communication between Akeneo and Tessa
