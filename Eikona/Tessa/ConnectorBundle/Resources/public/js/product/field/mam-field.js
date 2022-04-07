@@ -228,7 +228,7 @@ define(
           attribute: JSON.stringify({
             code: this.attribute.code,
             type: this.attribute.type,
-            labels: this.attribute.labels,
+            labels: this.getAttributeLabelsForTessa(this.attribute.labels),
             'allowed_extensions': this.attribute.allowed_extensions,
             'max_assets': this.attribute.max_characters
           }),
@@ -242,6 +242,35 @@ define(
         return Routing.generate('eikona_tessa_media_select', {
           data: jQuery.param(data)
         });
+      },
+
+      getAttributeLabelsForTessa(labels) {
+        const priorities = {
+          de: ['de_DE', 'de_AT', 'de_CH'],
+          en: ['en_US', 'en_GB'],
+          fr: ['fr_FR', 'fr_BE', 'fr_CH'],
+          es: ['es_ES'],
+        };
+
+        return ['de', 'en', 'fr', 'es'].reduce((labelsForTessa, language) => {
+          const priority = priorities[language];
+          // Try to find a label from the priority list
+          for (let i = 0; i < priority.length; i++) {
+            const localeCode = priority[i];
+            if (labels[localeCode]) {
+              labelsForTessa[localeCode] = labels[localeCode];
+              return labelsForTessa;
+            }
+          }
+
+          // Fallback: Try to find a label for the locale
+          const localeCode = Object.keys(labels).find((l) => l.substr(0, 2) === language);
+          if (localeCode) {
+            labelsForTessa[localeCode] = labels[localeCode];
+          }
+
+          return labelsForTessa;
+        }, {});
       },
 
       /**
