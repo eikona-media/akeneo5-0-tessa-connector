@@ -88,7 +88,10 @@ class LinkParser
      */
     public function getAssetIdFromTessaUrl($assetUrl): ?int
     {
-        if (preg_match('/asset_system_id=(\d+)/', $assetUrl, $matches) !== false) {
+        if (preg_match('/[?&]asset_system_id=(\d+)($|&)/', $assetUrl, $matches)) {
+            return (int)$matches[1];
+        }
+        if (preg_match('/[?&]id=(\d+)($|&)/', $assetUrl, $matches)) {
             return (int)$matches[1];
         }
         return null;
